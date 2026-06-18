@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive CSS3 demonstrations covering selectors, box model, Flexbox, Grid, animations, transitions, and responsive design with live examples.">
+  <title>CSS Demonstrations | My ePortfolio</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* CSS Demo page specific styles */
+    .css-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 24px;
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .css-demo-card {
+      background-color: var(--bg-secondary);
+      border-radius: var(--border-radius);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(196, 164, 128, 0.3);
+    }
+    
+    .css-demo-card h4 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .css-demo-card .preview-area {
+      background-color: rgba(133, 153, 174, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      min-height: 100px;
+    }
+    
+    .css-demo-card code-example {
+      display: block;
+      background-color: var(--slate);
+      color: var(--white);
+      font-family: var(--font-code);
+      font-size: 12px;
+      padding: 16px;
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+    
+    /* CSS Selectors Demo */
+    .selector-demo * { font-size: 12px; }
+    .selector-demo p { color: var(--soft-blue); }
+    .selector-demo .highlight { background-color: rgba(44, 80, 65, 0.1); padding: 2px 6px; border-radius: 4px; }
+    .selector-demo #unique { border: 2px solid var(--forest-green); padding: 4px 8px; border-radius: 4px; }
+    .selector-demo h5, .selector-demo h6 { color: var(--dusty-pink); }
+    .selector-demo [data-type="important"] { font-weight: 700; color: var(--forest-green); }
+    .selector-demo .parent > .child { border-left: 3px solid var(--warm-sand); padding-left: 8px; }
+    .selector-demo .sibling-adjacent h5 + p { color: var(--periwinkle); }
+    .selector-demo .sibling-general h5 ~ p { font-style: italic; }
+    .selector-demo a:hover { color: var(--forest-green); text-decoration: underline; }
+    .selector-demo input:focus { outline: 2px solid var(--forest-green); }
+    .selector-demo button:active { transform: scale(0.95); }
+    .selector-demo a:visited { color: var(--dusty-pink); }
+    .selector-demo .pseudo-list p:first-child { font-weight: 700; }
+    .selector-demo .pseudo-list p:last-child { color: var(--muted-grey); }
+    .selector-demo .pseudo-list p:nth-child(3) { background-color: rgba(44, 80, 65, 0.1); }
+    
+    /* Box Model Demo */
+    .box-model-demo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .box-margin {
+      background-color: rgba(255, 200, 100, 0.3);
+      padding: 20px;
+      border-radius: 12px;
+    }
+    
+    .box-border {
+      background-color: rgba(100, 200, 255, 0.3);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    
+    .box-padding {
+      background-color: rgba(100, 255, 150, 0.3);
+      padding: 20px;
+      border-radius: 8px;
+    }
+    
+    .box-content {
+      background-color: var(--soft-blue);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: 500;
+    }
+    
+    /* Flexbox Demo */
+    .flex-container {
+      display: flex;
+      gap: 8px;
+      background-color: rgba(133, 153, 174, 0.1);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 100px;
+      transition: all var(--transition-base);
+    }
+    
+    .flex-item {
+      background-color: var(--forest-green);
+      color: white;
+      padding: 16px 20px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    
+    /* Grid Demo */
+    .grid-container {
+      display: grid;
+      gap: 8px;
+      background-color: rgba(133, 153, 174, 0.1);
+      border-radius: 8px;
+      padding: 12px;
+      transition: all var(--transition-base);
+    }
+    
+    .grid-item {
+      background-color: var(--soft-blue);
+      color: white;
+      padding: 16px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    
+    /* Animation Demo */
+    @keyframes bounceDemo {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    @keyframes rotateDemo {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    @keyframes pulseDemo {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+    
+    .anim-bounce { animation: bounceDemo 1s infinite; }
+    .anim-rotate { animation: rotateDemo 2s linear infinite; }
+    .anim-pulse { animation: pulseDemo 1.5s infinite; }
+    
+    .anim-box {
+      width: 50px;
+      height: 50px;
+      background-color: var(--forest-green);
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+    }
+    
+    /* Transition Demo */
+    .transition-box {
+      width: 100%;
+      max-width: 200px;
+      height: 60px;
+      background-color: var(--soft-blue);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .transition-box:hover {
+      background-color: var(--forest-green);
+      transform: scale(1.05);
+      border-radius: 24px;
+    }
+    
+    /* Positioning Demo */
+    .position-demo-container {
+      position: relative;
+      height: 200px;
+      background-color: rgba(133, 153, 174, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .position-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    
+    .pos-static {
+      background-color: var(--muted-grey);
+      position: static;
+    }
+    
+    .pos-relative {
+      background-color: var(--soft-blue);
+      position: relative;
+      top: 10px;
+      left: 10px;
+    }
+    
+    .pos-absolute {
+      background-color: var(--forest-green);
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    
+    /* Transform Demo */
+    .transform-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    
+    .transform-box {
+      width: 70px;
+      height: 70px;
+      background-color: var(--forest-green);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 500;
+      transition: transform 0.3s ease;
+      margin: 0 auto;
+    }
+    
+    .transform-rotate:hover { transform: rotate(45deg); }
+    .transform-scale:hover { transform: scale(1.2); }
+    .transform-skew:hover { transform: skew(15deg); }
+    .transform-translate:hover { transform: translate(10px, -10px); }
+    .transform-combined:hover { transform: rotate(15deg) scale(1.1); }
+    
+    /* Media Query Visual Demo */
+    .media-query-box {
+      background-color: var(--soft-blue);
+      color: white;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+    
+    @media (max-width: 767px) {
+      .css-grid {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+      }
+      
+      .transform-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .media-query-box {
+        background-color: var(--dusty-pink);
+      }
+    }
+    
+    @media (min-width: 768px) and (max-width: 991px) {
+      .media-query-box {
+        background-color: var(--periwinkle);
+      }
+    }
+    
+    @media (min-width: 992px) {
+      .media-query-box {
+        background-color: var(--forest-green);
+      }
+    }
+    
+    /* CSS Variables Demo */
+    .var-demo-card {
+      --card-accent: var(--forest-green);
+      --card-padding: 20px;
+      background-color: var(--bg-secondary);
+      border-left: 4px solid var(--card-accent);
+      padding: var(--card-padding);
+      border-radius: 0 12px 12px 0;
+    }
+    
+    .var-demo-card.secondary {
+      --card-accent: var(--soft-blue);
+      --card-padding: 30px;
+    }
+    
+    .var-demo-card.tertiary {
+      --card-accent: var(--dusty-pink);
+      --card-padding: 15px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Page Loader -->
+  <div class="page-loader" role="status" aria-label="Loading page">
+    <div class="loader-shape"></div>
+  </div>
+
+  <!-- Fixed Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="site-logo">My ePortfolio</a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="fullstack.html" class="nav-link">Full Stack</a>
+        <a href="html-demo.html" class="nav-link">HTML</a>
+        <a href="css-demo.html" class="nav-link active">CSS</a>
+        <a href="bootstrap-demo.html" class="nav-link">Bootstrap</a>
+        <a href="js-demo.html" class="nav-link">JavaScript</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="fullstack.html" class="nav-link">Full Stack</a>
+      <a href="html-demo.html" class="nav-link">HTML</a>
+      <a href="css-demo.html" class="nav-link active">CSS</a>
+      <a href="bootstrap-demo.html" class="nav-link">Bootstrap</a>
+      <a href="js-demo.html" class="nav-link">JavaScript</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    
+    <!-- Page Hero -->
+    <section class="hero page-hero">
+      <div class="hero-content reveal">
+        <h1>CSS Demonstrations</h1>
+        <p>Cascading Style Sheets control the visual presentation of web pages. Explore selectors, the box model, layouts, animations, and responsive design through interactive examples.</p>
+      </div>
+    </section>
+
+    <!-- CSS Introduction -->
+    <section class="section">
+      <div class="container-narrow reveal">
+        <h2 class="text-center mb-4">Three Ways to Apply CSS</h2>
+        <p class="text-center" style="color: var(--text-secondary); margin-bottom: 40px;">CSS can be applied inline, internally within a &lt;style&gt; tag, or externally via a linked stylesheet. External CSS is the recommended approach for maintainability.</p>
+      </div>
+      <div class="css-grid">
+        <div class="css-demo-card reveal">
+          <h4><span>Inline CSS</span><span class="demo-badge badge-css">style attr</span></h4>
+          <div class="preview-area">
+            <p style="color: var(--forest-green); font-size: 16px; font-weight: 600;">This text is styled inline</p>
+          </div>
+          <code-example>&lt;p style="color: green; font-weight: bold;"&gt;Inline styled text&lt;/p&gt;</code-example>
+        </div>
+        
+        <div class="css-demo-card reveal reveal-delay-1">
+          <h4><span>Internal CSS</span><span class="demo-badge badge-css">&lt;style&gt;</span></h4>
+          <div class="preview-area">
+            <p style="color: var(--soft-blue); font-size: 16px;">Styled via internal &lt;style&gt; tag</p>
+          </div>
+          <code-example>&lt;style&gt;
+  .internal { color: blue; }
+&lt;/style&gt;
+&lt;p class="internal"&gt;Internal CSS&lt;/p&gt;</code-example>
+        </div>
+        
+        <div class="css-demo-card reveal reveal-delay-2">
+          <h4><span>External CSS</span><span class="demo-badge badge-css">.css file</span></h4>
+          <div class="preview-area">
+            <p style="color: var(--periwinkle); font-size: 16px;">Linked external stylesheet (this site uses this approach)</p>
+          </div>
+          <code-example>&lt;link rel="stylesheet" 
+      href="css/styles.css"&gt;
+
+/* In styles.css */
+.external { color: purple; }</code-example>
+        </div>
+      </div>
+    </section>
+
+    <!-- Selectors -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>CSS Selectors</h2>
+        <p>Selectors target HTML elements to apply styles. From simple to complex.</p>
+      </div>
+      <div class="css-grid">
+        <div class="css-demo-card reveal">
+          <h4><span>Basic Selectors</span><span class="demo-badge badge-css">Core</span></h4>
+          <div class="preview-area selector-demo">
+            <p>* Universal selector (all elements styled small)</p>
+            <p>&lt;p&gt; element selector (coloured text)</p>
+            <span class="highlight">.highlight class selector</span>
+            <br><br>
+            <span id="unique">#unique ID selector</span>
+            <h5>h5 grouped with h6</h5>
+            <h6>h6 also styled (group selector)</h6>
+          </div>
+          <code-example>/* Universal */
+* { margin: 0; }
+
+/* Element */
+p { color: blue; }
+
+/* Class */
+.highlight { background: yellow; }
+
+/* ID */
+#unique { border: 2px solid green; }
+
+/* Group */
+h5, h6 { color: pink; }</code-example>
+        </div>
+        
+        <div class="css-demo-card reveal reveal-delay-1">
+          <h4><span>Attribute &amp; Combinators</span><span class="demo-badge badge-css">Advanced</span></h4>
+          <div class="preview-area selector-demo">
+            <span data-type="important">[data-type="important"]</span>
+            <div class="parent" style="margin-top: 12px;">
+              <div class="child">.parent > .child (direct child)</div>
+              <div>
+                <div class="child">Nested .child (not direct)</div>
+              </div>
+            </div>
+            <div class="sibling-adjacent" style="margin-top: 12px;">
+              <h5>Adjacent sibling +</h5>
+              <p>This paragraph is adjacent (coloured)</p>
+              <p>This one is not</p>
+            </div>
+          </div>
+          <code-example>/* Attribute */
+[data-type="important"] { 
+  font-weight: bold; 
+}
+
+/* Child combinator */
+.parent > .child { 
+  border-left: 3px solid gold; 
+}
+
+/* Adjacent sibling */
+h5 + p { color: purple; }
+
+/* General sibling */
+h5 ~ p { font-style: italic; }</code-example>
+        </div>
+        
+        <div class="css-demo-card reveal reveal-delay-2">
+          <h4><span>Pseudo-classes</span><span class="demo-badge badge-css">State</span></h4>
+          <div class="preview-area selector-demo">
+            <a href="#css-demo" style="display: block; margin-bottom: 8px;">Hover over this link</a>
+            <input type="text" placeholder="Click to focus" style="padding: 8px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 8px;">
+            <br>
+            <button style="padding: 8px 16px; background: var(--forest-green); color: white; border: none; border-radius: 6px;">Hold click (active)</button>
+            <div class="pseudo-list" style="margin-top: 12px;">
+              <p>First child (bold)</p>
+              <p>Second child</p>
+              <p>Third child (nth-child highlighted)</p>
+              <p>Last child (muted)</p>
+            </div>
+          </div>
+          <code-example>/* User interaction */
+a:hover { text-decoration: underline; }
+input:focus { outline: 2px solid green; }
+button:active { transform: scale(0.95); }
+a:visited { color: purple; }
+
+/* Structural */
+:first-child { font-weight: bold; }
+:last-child { color: gray; }
+:nth-child(3) { background: lightgreen; }</code-example>
+        </div>
+      </div>
+    </section>
+
+    <!-- Box Model -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>The Box Model</h2>
+        <p>Every HTML element is a rectangular box composed of content, padding, border, and margin.</p>
+      </div>
+      <div class="max-width reveal reveal-delay-1">
+        <div class="css-demo-card">
+          <h4><span>Box Model Visualisation</span><span class="demo-badge badge-css">Layout</span></h4>
+          <div class="preview-area box-model-demo">
+            <div class="box-margin">
+              <span style="font-size: 11px; display: block; text-align: center; margin-bottom: 4px; color: var(--text-secondary);">Margin (orange)</span>
+              <div class="box-border">
+                <span style="font-size: 11px; display: block; text-align: center; margin-bottom: 4px; color: var(--text-secondary);">Border (blue)</span>
+                <div class="box-padding">
+                  <span style="font-size: 11px; display: block; text-align: center; margin-bottom: 4px; color: var(--text-secondary);">Padding (green)</span>
+                  <div class="box-content">Content</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <code-example>/* Box sizing */
+* { box-sizing: border-box; }
+
+/* Individual properties */
+.box {
+  width: 300px;
+  height: 200px;
+  padding: 20px;
+  border: 2px solid #333;
+  margin: 20px auto;
+}
+
+/* Shorthand */
+.box {
+  padding: 10px 20px 10px 20px;
+  margin: 20px 10px;
+  border: 2px solid #333;
+}</code-example>
+        </div>
+      </div>
+    </section>
+
+    <!-- Flexbox -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>Flexbox Layout</h2>
+        <p>One-dimensional layout system for distributing space along a single axis.</p>
+      </div>
+      <div class="max-width">
+        <div class="css-demo-card reveal">
+          <h4><span>Interactive Flexbox Controls</span><span class="demo-badge badge-css">Flexbox</span></h4>
+          <div class="playground-controls" style="flex-wrap: wrap; gap: 16px;">
+            <div>
+              <label>justify-content:</label>
+              <select id="flexJustify" onchange="updateFlexbox()">
+                <option value="flex-start">flex-start</option>
+                <option value="center" selected>center</option>
+                <option value="flex-end">flex-end</option>
+                <option value="space-between">space-between</option>
+                <option value="space-around">space-around</option>
+                <option value="space-evenly">space-evenly</option>
+              </select>
+            </div>
+            <div>
+              <label>align-items:</label>
+              <select id="flexAlign" onchange="updateFlexbox()">
+                <option value="flex-start">flex-start</option>
+                <option value="center" selected>center</option>
+                <option value="flex-end">flex-end</option>
+                <option value="stretch">stretch</option>
+              </select>
+            </div>
+            <div>
+              <label>flex-direction:</label>
+              <select id="flexDirection" onchange="updateFlexbox()">
+                <option value="row" selected>row</option>
+                <option value="column">column</option>
+                <option value="row-reverse">row-reverse</option>
+              </select>
+            </div>
+            <div>
+              <label>flex-wrap:</label>
+              <select id="flexWrap" onchange="updateFlexbox()">
+                <option value="nowrap">nowrap</option>
+                <option value="wrap" selected>wrap</option>
+              </select>
+            </div>
+          </div>
+          <div class="preview-area">
+            <div class="flex-container" id="flexDemo">
+              <div class="flex-item">1</div>
+              <div class="flex-item">2</div>
+              <div class="flex-item">3</div>
+              <div class="flex-item">4</div>
+              <div class="flex-item">5</div>
+            </div>
+          </div>
+          <code-example id="flexCode">.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}</code-example>
+        </div>
+      </div>
+    </section>
+
+    <!-- CSS Grid -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>CSS Grid Layout</h2>
+        <p>Two-dimensional layout system for creating complex grid-based designs.</p>
+      </div>
+      <div class="max-width">
+        <div class="css-demo-card reveal">
+          <h4><span>Interactive Grid Controls</span><span class="demo-badge badge-css">Grid</span></h4>
+          <div class="playground-controls" style="flex-wrap: wrap; gap: 16px;">
+            <div>
+              <label>grid-template-columns:</label>
+              <select id="gridColumns" onchange="updateGrid()">
+                <option value="1fr 1fr 1fr" selected>1fr 1fr 1fr</option>
+                <option value="1fr 2fr 1fr">1fr 2fr 1fr</option>
+                <option value="repeat(4, 1fr)">repeat(4, 1fr)</option>
+                <option value="200px 1fr 200px">200px 1fr 200px</option>
+              </select>
+            </div>
+            <div>
+              <label>gap:</label>
+              <select id="gridGap" onchange="updateGrid()">
+                <option value="8px" selected>8px</option>
+                <option value="16px">16px</option>
+                <option value="24px">24px</option>
+              </select>
+            </div>
+            <div>
+              <label>justify-items:</label>
+              <select id="gridJustify" onchange="updateGrid()">
+                <option value="stretch" selected>stretch</option>
+                <option value="center">center</option>
+                <option value="start">start</option>
+              </select>
+            </div>
+          </div>
+          <div class="preview-area">
+            <div class="grid-container" id="gridDemo" style="grid-template-columns: 1fr 1fr 1fr;">
+              <div class="grid-item">1</div>
+              <div class="grid-item">2</div>
+              <div class="grid-item">3</div>
+              <div class="grid-item">4</div>
+              <div class="grid-item">5</div>
+              <div class="grid-item">6</div>
+            </div>
+          </div>
+          <code-example id="gridCode">.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  justify-items: stretch;
+}</code-example>
+        </div>
+      </div>
+    </section>
+
+    <!-- Positioning -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>Positioning</h2>
+        <p>Control how elements are positioned in the document flow.</p>
+      </div>
+      <div class="css-grid">
+        <div class="css-demo-card reveal">
+          <h4><span>Position Types</span><span class="demo-badge badge-css">Layout</span></h4>
+          <div class="preview-area">
+            <div class="position-demo-container">
+              <div class="position-box pos-static">static</div>
+              <div class="position-box pos-relative">relative</div>
+              <div class="position-box pos-absolute">absolute</div>
+            </div>
+          </div>
+          <code-example>/* Static - default flow */
+.static { position: static; }
+
+/* Relative - offset from normal */
+.relative { 
+  position: relative; 
+  top: 10px; 
+  left: 10px; 
+}
+
+/* Absolute - relative to ancestor */
+.absolute { 
+  position: absolute; 
+  top: 10px; 
+  right: 10px; 
+}
+
+/* Fixed - relative to viewport */
+.fixed { 
+  position: fixed; 
+  bottom: 20px; 
+}
+
+/* Sticky - hybrid behaviour */
+.sticky { 
+  position: sticky; 
+  top: 0; 
+}</code-example>
+        </div>
+        
+        <div class="css-demo-card reveal reveal-delay-1">
+          <h4><span>Display &amp; Visibility</span><span class="demo-badge badge-css">Display</span></h4>
+          <div class="preview-area">
+            <div style="display: block; background: var(--soft-blue); color: white; padding: 8px; margin-bottom: 8px; border-radius: 6px; font-size: 13px;">display: block (full width)</div>
+            <span style="display: inline; background: var(--forest-green); color: white; padding: 8px; margin-right: 8px; border-radius: 6px; font-size: 13px;">inline</span>
+            <span style="display: inline-block; background: var(--periwinkle); color: white; padding: 8px 16px; border-radius: 6px; font-size: 13px;">inline-block</span>
+            <div style="display: flex; gap: 8px; margin-top: 12px; background: rgba(133,153,174,0.1); padding: 8px; border-radius: 6px;">
+              <span style="background: var(--dusty-pink); color: white; padding: 4px 12px; border-radius: 4px; font-size: 12px;">flex</span>
+              <span style="background: var(--dusty-pink); color: white; padding: 4px 12px; border-radius: 4px; font-size: 12px;">item</span>
+            </div>
+            <div style="display: none; margin-top: 8px;">This is hidden (display: none)</div>
+            <div style="visibility: hidden; margin-top: 8px;">This is invisible (visibility: hidden) but takes space</div>
+          </div>
+          <code-example>/* Display types */
+.block { display: block; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
+.flex { display: flex; }
+.grid { display: grid; }
+.none { display: none; } /* Removed */
+
+/* Visibility */
+.hidden { visibility: hidden; } /* Invisible */</code-example>
+        </div>
+      </div>
+    </section>
+
+    <!-- Typography & Colors -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>Typography &amp; Colours</h2>
+        <p>Styling text and applying colours to create visual hierarchy.</p>
+      </div>
+      <div class="css-grid">
+        <div class="css-demo-card reveal">
+          <h4><span>Typography Properties</span><span class="demo-badge badge-css">Text</span></h4>
+          <div class="preview-area">
+            <p style="font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 12px;">Playfair Display - Serif heading font</p>
+            <p style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 300; margin-bottom: 12px;">Inter Light (300) - Body text</p>
+            <p style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 500; margin-bottom: 12px;">Inter Medium (500) - Emphasis</p>
+            <p style="font-size: 18px; line-height: 1.8; letter-spacing: 0.5px; margin-bottom: 12px;">Line height 1.8 with letter spacing</p>
+            <p style="text-align: center; margin-bottom: 12px;">Center aligned text</p>
+            <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 13px; margin-bottom: 12px;">Uppercase with tracking</p>
+            <p style="text-decoration: underline; text-decoration-color: var(--forest-green); text-underline-offset: 4px; margin: 0;">Underlined text with offset</p>
+          </div>
+          <code-example>.heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: underline;
+}</code-example>
+        </div>
+        
+        <div class="css-demo-card reveal reveal-delay-1">
+          <h4><span>Colours &amp; Backgrounds</span><span class="demo-badge badge-css">Colour</span></h4>
+          <div class="preview-area">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;">
+              <div style="background: #2c5041; color: white; padding: 12px; border-radius: 8px; text-align: center; font-size: 11px;">#2c5041</div>
+              <div style="background: #8599ae; color: white; padding: 12px; border-radius: 8px; text-align: center; font-size: 11px;">#8599ae</div>
+              <div style="background: #8b85a8; color: white; padding: 12px; border-radius: 8px; text-align: center; font-size: 11px;">#8b85a8</div>
+              <div style="background: #c4a480; color: white; padding: 12px; border-radius: 8px; text-align: center; font-size: 11px;">#c4a480</div>
+              <div style="background: #b89da4; color: white; padding: 12px; border-radius: 8px; text-align: center; font-size: 11px;">#b89da4</div>
+              <div style="background: #4a6a76; color: white; padding: 12px; border-radius: 8px; text-align: center; font-size: 11px;">#4a6a76</div>
+            </div>
+            <div style="background: linear-gradient(135deg, #2c5041, #8599ae); color: white; padding: 16px; border-radius: 8px; text-align: center; font-size: 13px; margin-bottom: 8px;">Linear gradient background</div>
+            <div style="background: radial-gradient(circle, #8b85a8, #4a6a76); color: white; padding: 16px; border-radius: 8px; text-align: center; font-size: 13px;">Radial gradient background</div>
+          </div>
+          <code-example>/* Named colours */
+color: forestgreen;
+
+/* Hex */
+color: #2c5041;
+
+/* RGB/RGBA */
+color: rgb(44, 80, 65);
+background: rgba(44, 80, 65, 0.5);
+
+/* HSL */
+color: hsl(152, 29%, 24%);
+
+/* Gradients */
+background: linear-gradient(135deg, #2c5041, #8599ae);
+background: radial-gradient(circle, #8b85a8, #4a6a76);</code-example>
+        </div>
+      </div>
+    </section>
+
+    <!-- Transforms & Transitions -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>Transforms &amp; Transitions</h2>
+        <p>Visual effects that enhance user interaction and add polish.</p>
+      </div>
+      <div class="css-grid">
+        <div class="css-demo-card reveal">
+          <h4><span>CSS Transforms</span><span class="demo-badge badge-css">Visual</span></h4>
+          <div class="preview-area">
+            <div class="transform-grid">
+              <div>
+                <div class="transform-box transform-rotate">Rotate</div>
+                <p style="text-align: center; font-size: 11px; margin-top: 8px; color: var(--text-secondary);">rotate(45deg)</p>
+              </div>
+              <div>
+                <div class="transform-box transform-scale">Scale</div>
+                <p style="text-align: center; font-size: 11px; margin-top: 8px; color: var(--text-secondary);">scale(1.2)</p>
+              </div>
+              <div>
+                <div class="transform-box transform-skew">Skew</div>
+                <p style="text-align: center; font-size: 11px; margin-top: 8px; color: var(--text-secondary);">skew(15deg)</p>
+              </div>
+              <div>
+                <div class="transform-box transform-translate">Move</div>
+                <p style="text-align: center; font-size: 11px; margin-top: 8px; color: var(--text-secondary);">translate(10px)</p>
+              </div>
+              <div>
+                <div class="transform-box transform-combined">Combo</div>
+                <p style="text-align: center; font-size: 11px; margin-top: 8px; color: var(--text-secondary);">rotate + scale</p>
+              </div>
+            </div>
+          </div>
+          <code-example>.rotate:hover { transform: rotate(45deg); }
+.scale:hover { transform: scale(1.2); }
+.skew:hover { transform: skew(15deg); }
+.move:hover { transform: translate(10px, -10px); }
+.combo:hover { transform: rotate(15deg) scale(1.1); }</code-example>
+        </div>
+        
+        <div class="css-demo-card reveal reveal-delay-1">
+          <h4><span>CSS Transitions</span><span class="demo-badge badge-css">Motion</span></h4>
+          <div class="preview-area" style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+            <div class="transition-box">Hover me!</div>
+            <p style="text-align: center; font-size: 13px; color: var(--text-secondary); margin: 0;">Smooth transition between states</p>
+          </div>
+          <code-example>.button {
+  background: #8599ae;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: #2c5041;
+  transform: scale(1.05);
+  border-radius: 24px;
+}</code-example>
+        </div>
+        
+        <div class="css-demo-card reveal reveal-delay-2">
+          <h4><span>Keyframe Animations</span><span class="demo-badge badge-css">Animate</span></h4>
+          <div class="preview-area" style="display: flex; justify-content: space-around; align-items: center;">
+            <div style="text-align: center;">
+              <div class="anim-box anim-bounce"><i class="bi bi-arrow-up"></i></div>
+              <p style="font-size: 11px; margin-top: 8px; color: var(--text-secondary);">Bounce</p>
+            </div>
+            <div style="text-align: center;">
+              <div class="anim-box anim-rotate"><i class="bi bi-arrow-repeat"></i></div>
+              <p style="font-size: 11px; margin-top: 8px; color: var(--text-secondary);">Rotate</p>
+            </div>
+            <div style="text-align: center;">
+              <div class="anim-box anim-pulse"><i class="bi bi-heart"></i></div>
+              <p style="font-size: 11px; margin-top: 8px; color: var(--text-secondary);">Pulse</p>
+            </div>
+          </div>
+          <code-example>@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.box { animation: bounce 1s infinite; }
+
+/* Shorthand */
+animation: name duration timing-function 
+           delay iteration-count direction;</code-example>
+        </div>
+      </div>
+    </section>
+
+    <!-- Responsive & Variables -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>Responsive Design &amp; CSS Variables</h2>
+        <p>Building adaptable layouts and using custom properties for maintainable styles.</p>
+      </div>
+      <div class="css-grid">
+        <div class="css-demo-card reveal">
+          <h4><span>Media Queries</span><span class="demo-badge badge-css">Responsive</span></h4>
+          <div class="preview-area">
+            <div class="media-query-box">
+              Resize your browser to see me change colour!
+              <br><br>
+              <span style="font-size: 13px; opacity: 0.8;">
+                Mobile: Pink | Tablet: Purple | Desktop: Green
+              </span>
+            </div>
+          </div>
+          <code-example>/* Mobile first approach */
+.element { background: #b89da4; }
+
+/* Tablet */
+@media (min-width: 768px) {
+  .element { background: #8b85a8; }
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+  .element { background: #2c5041; }
+}</code-example>
+        </div>
+        
+        <div class="css-demo-card reveal reveal-delay-1">
+          <h4><span>CSS Custom Properties</span><span class="demo-badge badge-css">Variables</span></h4>
+          <div class="preview-area">
+            <div class="var-demo-card">
+              <h5 style="margin-bottom: 8px;">Primary Card</h5>
+              <p style="font-size: 13px; margin: 0; color: var(--text-secondary);">Uses --card-accent: green, --card-padding: 20px</p>
+            </div>
+            <div class="var-demo-card secondary" style="margin-top: 12px;">
+              <h5 style="margin-bottom: 8px;">Secondary Card</h5>
+              <p style="font-size: 13px; margin: 0; color: var(--text-secondary);">Uses --card-accent: blue, --card-padding: 30px</p>
+            </div>
+            <div class="var-demo-card tertiary" style="margin-top: 12px;">
+              <h5 style="margin-bottom: 8px;">Tertiary Card</h5>
+              <p style="font-size: 13px; margin: 0; color: var(--text-secondary);">Uses --card-accent: pink, --card-padding: 15px</p>
+            </div>
+          </div>
+          <code-example>:root {
+  --primary: #2c5041;
+  --spacing: 20px;
+}
+
+.card {
+  --card-accent: var(--primary);
+  border-left: 4px solid var(--card-accent);
+  padding: var(--spacing);
+}
+
+/* Override locally */
+.card.secondary {
+  --card-accent: #8599ae;
+}</code-example>
+        </div>
+        
+        <div class="css-demo-card reveal reveal-delay-2">
+          <h4><span>Pseudo-elements</span><span class="demo-badge badge-css">::before</span></h4>
+          <div class="preview-area">
+            <p class="pseudo-first-line" style="font-size: 15px; line-height: 1.8;">The first line of this paragraph is styled differently thanks to the ::first-line pseudo-element. It automatically adapts to the container width, styling only the text that appears on the first visual line of the element.</p>
+            <hr style="margin: 16px 0;">
+            <p class="pseudo-first-letter" style="font-size: 15px; line-height: 1.8;">The first letter of this paragraph is styled as a drop cap using the ::first-letter pseudo-element, creating an elegant typographic effect commonly seen in print publications.</p>
+          </div>
+          <code-example>/* First line styling */
+p::first-line {
+  font-weight: bold;
+  color: #2c5041;
+}
+
+/* Drop cap */
+p::first-letter {
+  font-size: 3em;
+  float: left;
+  margin-right: 8px;
+  color: #2c5041;
+}</code-example>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive CSS Playground -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>Interactive CSS Playground</h2>
+        <p>Use the controls to style the demo box in real-time.</p>
+      </div>
+      <div class="max-width reveal reveal-delay-1">
+        <div class="css-demo-card">
+          <div class="playground-controls" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;">
+            <div>
+              <label>Background:</label>
+              <input type="color" id="playBg" value="#8599ae" onchange="updatePlayground()">
+            </div>
+            <div>
+              <label>Text Colour:</label>
+              <input type="color" id="playColor" value="#ffffff" onchange="updatePlayground()">
+            </div>
+            <div>
+              <label>Border Radius:</label>
+              <input type="range" id="playRadius" min="0" max="50" value="12" oninput="updatePlayground()">
+              <span id="radiusVal" style="font-size: 12px;">12px</span>
+            </div>
+            <div>
+              <label>Padding:</label>
+              <input type="range" id="playPadding" min="10" max="60" value="30" oninput="updatePlayground()">
+              <span id="paddingVal" style="font-size: 12px;">30px</span>
+            </div>
+            <div>
+              <label>Font Size:</label>
+              <input type="range" id="playFontSize" min="12" max="32" value="16" oninput="updatePlayground()">
+              <span id="fontSizeVal" style="font-size: 12px;">16px</span>
+            </div>
+            <div>
+              <label>Border Width:</label>
+              <input type="range" id="playBorder" min="0" max="10" value="0" oninput="updatePlayground()">
+              <span id="borderVal" style="font-size: 12px;">0px</span>
+            </div>
+            <div>
+              <label>Box Shadow:</label>
+              <select id="playShadow" onchange="updatePlayground()">
+                <option value="none">None</option>
+                <option value="0 4px 10px rgba(0,0,0,0.1)">Small</option>
+                <option value="0 8px 30px rgba(0,0,0,0.15)" selected>Medium</option>
+                <option value="0 12px 40px rgba(0,0,0,0.2)">Large</option>
+              </select>
+            </div>
+            <div>
+              <label>Transform:</label>
+              <select id="playTransform" onchange="updatePlayground()">
+                <option value="none">None</option>
+                <option value="rotate(5deg)">Rotate</option>
+                <option value="scale(1.05)">Scale</option>
+                <option value="skew(-5deg)">Skew</option>
+              </select>
+            </div>
+          </div>
+          <div class="preview-area" style="display: flex; justify-content: center; padding: 40px;">
+            <div id="playgroundBox" style="background-color: #8599ae; color: white; padding: 30px; border-radius: 12px; text-align: center; font-weight: 500; box-shadow: 0 8px 30px rgba(0,0,0,0.15); transition: all 0.3s ease;">
+              CSS Playground Box
+            </div>
+          </div>
+          <code-example id="playgroundCode">.box {
+  background-color: #8599ae;
+  color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}</code-example>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>My ePortfolio</h3>
+        <p>A comprehensive demonstration of Full Stack Web Development skills, built as a learning portfolio to showcase HTML, CSS, Bootstrap, and JavaScript proficiency.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="fullstack.html">What is Full Stack</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Technologies</h4>
+        <ul class="footer-links">
+          <li><a href="html-demo.html">HTML5</a></li>
+          <li><a href="css-demo.html">CSS3</a></li>
+          <li><a href="bootstrap-demo.html">Bootstrap 5</a></li>
+          <li><a href="js-demo.html">JavaScript</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Thank You</h4>
+        <p style="color: rgba(244,244,244,0.7); font-size: 14px;">Thank you for visiting my ePortfolio. This website was built entirely with HTML5, CSS3, Bootstrap 5, and vanilla JavaScript to demonstrate my understanding of core web technologies.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p> 2024 My ePortfolio. Built with passion for web development education.</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+  
+  <script>
+    // Flexbox controls
+    function updateFlexbox() {
+      const container = document.getElementById('flexDemo');
+      const justify = document.getElementById('flexJustify').value;
+      const align = document.getElementById('flexAlign').value;
+      const direction = document.getElementById('flexDirection').value;
+      const wrap = document.getElementById('flexWrap').value;
+      
+      container.style.justifyContent = justify;
+      container.style.alignItems = align;
+      container.style.flexDirection = direction;
+      container.style.flexWrap = wrap;
+      
+      document.getElementById('flexCode').textContent = `.container {
+  display: flex;
+  justify-content: ${justify};
+  align-items: ${align};
+  flex-direction: ${direction};
+  flex-wrap: ${wrap};
+}`;
+    }
+    
+    // Grid controls
+    function updateGrid() {
+      const container = document.getElementById('gridDemo');
+      const columns = document.getElementById('gridColumns').value;
+      const gap = document.getElementById('gridGap').value;
+      const justify = document.getElementById('gridJustify').value;
+      
+      container.style.gridTemplateColumns = columns;
+      container.style.gap = gap;
+      container.style.justifyItems = justify;
+      
+      document.getElementById('gridCode').textContent = `.container {
+  display: grid;
+  grid-template-columns: ${columns};
+  gap: ${gap};
+  justify-items: ${justify};
+}`;
+    }
+    
+    // Playground controls
+    function updatePlayground() {
+      const box = document.getElementById('playgroundBox');
+      const bg = document.getElementById('playBg').value;
+      const color = document.getElementById('playColor').value;
+      const radius = document.getElementById('playRadius').value;
+      const padding = document.getElementById('playPadding').value;
+      const fontSize = document.getElementById('playFontSize').value;
+      const border = document.getElementById('playBorder').value;
+      const shadow = document.getElementById('playShadow').value;
+      const transform = document.getElementById('playTransform').value;
+      
+      box.style.backgroundColor = bg;
+      box.style.color = color;
+      box.style.borderRadius = radius + 'px';
+      box.style.padding = padding + 'px';
+      box.style.fontSize = fontSize + 'px';
+      box.style.border = border + 'px solid ' + color;
+      box.style.boxShadow = shadow;
+      box.style.transform = transform;
+      
+      document.getElementById('radiusVal').textContent = radius + 'px';
+      document.getElementById('paddingVal').textContent = padding + 'px';
+      document.getElementById('fontSizeVal').textContent = fontSize + 'px';
+      document.getElementById('borderVal').textContent = border + 'px';
+      
+      document.getElementById('playgroundCode').textContent = `.box {
+  background-color: ${bg};
+  color: ${color};
+  padding: ${padding}px;
+  border-radius: ${radius}px;
+  font-size: ${fontSize}px;
+  border: ${border}px solid ${color};
+  box-shadow: ${shadow};
+  transform: ${transform};
+}`;
+    }
+    
+    // First line pseudo-element styling via JS for demo
+    document.addEventListener('DOMContentLoaded', function() {
+      const firstLineStyle = document.createElement('style');
+      firstLineStyle.textContent = `
+        .pseudo-first-line::first-line {
+          font-weight: bold;
+          color: var(--forest-green);
+          font-size: 1.1em;
+        }
+        .pseudo-first-letter::first-letter {
+          font-size: 3em;
+          float: left;
+          margin-right: 8px;
+          line-height: 1;
+          color: var(--forest-green);
+          font-family: var(--font-display);
+        }
+      `;
+      document.head.appendChild(firstLineStyle);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Comprehensive Bootstrap 5 demonstrations including grid system, components, utilities, forms, and responsive design patterns.">
+  <title>Bootstrap Demonstrations | My ePortfolio</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* Bootstrap Demo page overrides */
+    :root {
+      --bs-primary: #2c5041;
+      --bs-secondary: #8599ae;
+      --bs-success: #2c5041;
+      --bs-info: #4a6a76;
+      --bs-warning: #c4a480;
+      --bs-danger: #b85450;
+      --bs-light: #e8e5d6;
+      --bs-dark: #231f20;
+    }
+    
+    .btn-primary {
+      --bs-btn-bg: #2c5041;
+      --bs-btn-border-color: #2c5041;
+      --bs-btn-hover-bg: #1e3a2e;
+      --bs-btn-hover-border-color: #1e3a2e;
+    }
+    
+    .btn-secondary {
+      --bs-btn-bg: #8599ae;
+      --bs-btn-border-color: #8599ae;
+    }
+    
+    .btn-outline-primary {
+      --bs-btn-color: #2c5041;
+      --bs-btn-border-color: #2c5041;
+      --bs-btn-hover-bg: #2c5041;
+      --bs-btn-hover-border-color: #2c5041;
+    }
+    
+    .bg-primary { background-color: #2c5041 !important; }
+    .bg-secondary { background-color: #8599ae !important; }
+    .bg-info { background-color: #4a6a76 !important; }
+    .bg-warning { background-color: #c4a480 !important; }
+    .text-primary { color: #2c5041 !important; }
+    .text-secondary { color: #8599ae !important; }
+    .border-primary { border-color: #2c5041 !important; }
+    
+    .bs-demo-card {
+      background-color: var(--bg-secondary);
+      border-radius: var(--border-radius);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(196, 164, 128, 0.3);
+      margin-bottom: 24px;
+    }
+    
+    .bs-demo-card h4 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .bs-demo-card .preview-area {
+      background-color: rgba(133, 153, 174, 0.05);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    
+    .grid-demo-box {
+      background-color: rgba(44, 80, 65, 0.1);
+      border: 1px solid rgba(44, 80, 65, 0.2);
+      padding: 16px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 13px;
+    }
+    
+    .code-snippet {
+      background-color: var(--slate);
+      color: var(--white);
+      font-family: var(--font-code);
+      font-size: 12px;
+      padding: 16px;
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+    
+    .progress-bar-animated {
+      animation: progressBar 2s ease-in-out;
+    }
+    
+    @keyframes progressBar {
+      from { width: 0; }
+    }
+    
+    .carousel-item img {
+      height: 300px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    
+    @media (max-width: 767px) {
+      .carousel-item img {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Page Loader -->
+  <div class="page-loader" role="status" aria-label="Loading page">
+    <div class="loader-shape"></div>
+  </div>
+
+  <!-- Fixed Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="site-logo">My ePortfolio</a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="fullstack.html" class="nav-link">Full Stack</a>
+        <a href="html-demo.html" class="nav-link">HTML</a>
+        <a href="css-demo.html" class="nav-link">CSS</a>
+        <a href="bootstrap-demo.html" class="nav-link active">Bootstrap</a>
+        <a href="js-demo.html" class="nav-link">JavaScript</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="fullstack.html" class="nav-link">Full Stack</a>
+      <a href="html-demo.html" class="nav-link">HTML</a>
+      <a href="css-demo.html" class="nav-link">CSS</a>
+      <a href="bootstrap-demo.html" class="nav-link active">Bootstrap</a>
+      <a href="js-demo.html" class="nav-link">JavaScript</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    
+    <!-- Page Hero -->
+    <section class="hero page-hero">
+      <div class="hero-content reveal">
+        <h1>Bootstrap Demonstrations</h1>
+        <p>Bootstrap 5 is the world's most popular front-end component library. Explore its powerful grid system, pre-built components, and utility classes that enable rapid, responsive UI development.</p>
+      </div>
+    </section>
+
+    <!-- Grid System -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>Grid System &amp; Containers</h2>
+        <p>Bootstrap's mobile-first flexbox grid with 12 columns and five responsive tiers.</p>
+      </div>
+      <div class="max-width">
+        <div class="bs-demo-card reveal">
+          <h4><span>Responsive Grid</span><span class="demo-badge badge-bs">Layout</span></h4>
+          <div class="preview-area">
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Resize your browser to see columns adapt. 3 columns on desktop, 2 on tablet, 1 on mobile.</p>
+            <div class="container-fluid">
+              <div class="row g-3">
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="grid-demo-box">.col-12 .col-md-6 .col-lg-4</div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="grid-demo-box">.col-12 .col-md-6 .col-lg-4</div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="grid-demo-box">.col-12 .col-md-6 .col-lg-4</div>
+                </div>
+              </div>
+              <div class="row g-3 mt-2">
+                <div class="col-6 col-md-4 col-lg-2">
+                  <div class="grid-demo-box">2/12</div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                  <div class="grid-demo-box">2/12</div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                  <div class="grid-demo-box">2/12</div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                  <div class="grid-demo-box">2/12</div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                  <div class="grid-demo-box">2/12</div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                  <div class="grid-demo-box">2/12</div>
+                </div>
+              </div>
+              <div class="row g-3 mt-2">
+                <div class="col-8">
+                  <div class="grid-demo-box">.col-8 (wider)</div>
+                </div>
+                <div class="col-4">
+                  <div class="grid-demo-box">.col-4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="code-snippet">&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-12 col-md-6 col-lg-4"&gt;Content&lt;/div&gt;
+    &lt;div class="col-12 col-md-6 col-lg-4"&gt;Content&lt;/div&gt;
+    &lt;div class="col-12 col-md-6 col-lg-4"&gt;Content&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Breakpoints: xs, sm (576px), md (768px), lg (992px), xl (1200px), xxl (1400px) --&gt;</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Typography & Utilities -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>Typography &amp; Utilities</h2>
+        <p>Bootstrap's typography system and spacing utilities for rapid development.</p>
+      </div>
+      <div class="max-width">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="bs-demo-card reveal h-100">
+              <h4><span>Typography</span><span class="demo-badge badge-bs">Type</span></h4>
+              <div class="preview-area">
+                <h1 class="display-6">Display 6 Heading</h1>
+                <h2>h2 Heading</h2>
+                <h3>h3 Heading</h3>
+                <h4>h4 Heading <span class="badge bg-primary">New</span></h4>
+                <p class="lead">Lead paragraph with larger, lighter text for emphasis.</p>
+                <p>Normal paragraph with <mark>highlighted</mark> text, <del>deleted</del> text, and <strong>bold</strong> text.</p>
+                <p class="text-primary">.text-primary colour</p>
+                <p class="text-secondary">.text-secondary colour</p>
+                <p class="text-center">.text-center aligned</p>
+                <p class="text-uppercase">.text-uppercase transformed</p>
+                <blockquote class="blockquote">
+                  <p>A well-known quote contained in a blockquote element.</p>
+                  <footer class="blockquote-footer">Someone famous</footer>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="bs-demo-card reveal reveal-delay-1 h-100">
+              <h4><span>Spacing &amp; Display Utilities</span><span class="demo-badge badge-bs">Utils</span></h4>
+              <div class="preview-area">
+                <div class="p-3 mb-2 bg-primary text-white">.p-3 (padding)</div>
+                <div class="p-4 mb-2 bg-secondary text-white">.p-4 (more padding)</div>
+                <div class="px-5 py-3 mb-2 bg-info text-white">.px-5 .py-3</div>
+                <div class="m-3 p-2 bg-warning">.m-3 (margin) + .p-2</div>
+                <div class="ms-auto p-2 bg-primary text-white" style="width: 200px;">.ms-auto (margin-left: auto)</div>
+                <hr>
+                <div class="d-inline p-2 bg-primary text-white">.d-inline</div>
+                <div class="d-inline p-2 bg-secondary text-white">.d-inline</div>
+                <div class="d-block p-2 bg-info text-white mt-2">.d-block</div>
+                <div class="d-flex gap-2 mt-2 p-2" style="background: rgba(133,153,174,0.1);">
+                  <span class="p-2 bg-primary text-white">.d-flex</span>
+                  <span class="p-2 bg-secondary text-white">item</span>
+                </div>
+                <div class="d-none d-md-block mt-2 p-2 bg-success text-white">Hidden on mobile, visible on md+ (.d-none .d-md-block)</div>
+                <hr>
+                <div class="border p-2 mb-2">.border</div>
+                <div class="border-top border-3 border-primary p-2 mb-2">.border-top .border-3</div>
+                <div class="rounded p-2 bg-primary text-white mb-2">.rounded</div>
+                <div class="rounded-pill p-2 bg-secondary text-white text-center">.rounded-pill</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Buttons & Badges -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>Buttons &amp; Badges</h2>
+        <p>Custom button styles and contextual badge components.</p>
+      </div>
+      <div class="max-width">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="bs-demo-card reveal h-100">
+              <h4><span>Button Variants</span><span class="demo-badge badge-bs">Buttons</span></h4>
+              <div class="preview-area">
+                <div class="mb-3">
+                  <button class="btn btn-primary mb-2">Primary</button>
+                  <button class="btn btn-secondary mb-2">Secondary</button>
+                  <button class="btn btn-success mb-2">Success</button>
+                  <button class="btn btn-danger mb-2">Danger</button>
+                  <button class="btn btn-warning mb-2">Warning</button>
+                  <button class="btn btn-info mb-2">Info</button>
+                  <button class="btn btn-light mb-2">Light</button>
+                  <button class="btn btn-dark mb-2">Dark</button>
+                </div>
+                <div class="mb-3">
+                  <button class="btn btn-outline-primary mb-2">Outline</button>
+                  <button class="btn btn-outline-secondary mb-2">Outline</button>
+                  <button class="btn btn-outline-success mb-2">Outline</button>
+                </div>
+                <div class="mb-3">
+                  <button class="btn btn-primary btn-lg mb-2">Large</button>
+                  <button class="btn btn-primary mb-2">Normal</button>
+                  <button class="btn btn-primary btn-sm mb-2">Small</button>
+                </div>
+                <div>
+                  <button class="btn btn-primary" disabled>Disabled</button>
+                  <a href="#" class="btn btn-primary disabled" role="button" aria-disabled="true">Disabled Link</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="bs-demo-card reveal reveal-delay-1 h-100">
+              <h4><span>Badges</span><span class="demo-badge badge-bs">Labels</span></h4>
+              <div class="preview-area">
+                <h5>Example Heading <span class="badge bg-secondary">New</span></h5>
+                <div class="mb-3">
+                  <span class="badge bg-primary">Primary</span>
+                  <span class="badge bg-secondary">Secondary</span>
+                  <span class="badge bg-success">Success</span>
+                  <span class="badge bg-danger">Danger</span>
+                  <span class="badge bg-warning text-dark">Warning</span>
+                  <span class="badge bg-info">Info</span>
+                  <span class="badge bg-light text-dark">Light</span>
+                  <span class="badge bg-dark">Dark</span>
+                </div>
+                <div class="mb-3">
+                  <span class="badge rounded-pill bg-primary">Pill Primary</span>
+                  <span class="badge rounded-pill bg-success">Pill Success</span>
+                  <span class="badge rounded-pill bg-danger">Pill Danger</span>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-primary position-relative">
+                    Inbox
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      99+
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>Cards</h2>
+        <p>Flexible content containers with support for images, text, and actions.</p>
+      </div>
+      <div class="max-width">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm reveal">
+              <img src="images/project1.jpg" class="card-img-top" alt="Card image" style="height: 160px; object-fit: cover;">
+              <div class="card-body">
+                <h5 class="card-title">Card with Image</h5>
+                <p class="card-text text-secondary" style="font-size: 14px;">A card containing an image, title, description, and action button.</p>
+                <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm reveal reveal-delay-1">
+              <div class="card-header bg-primary text-white">Featured</div>
+              <div class="card-body">
+                <h5 class="card-title">Header &amp; List</h5>
+                <p class="card-text text-secondary" style="font-size: 14px;">Card with header, body, and list group.</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">An item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+              </ul>
+              <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card text-center h-100 shadow-sm reveal reveal-delay-2">
+              <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="true" href="#">Active</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Navigation Tabs</h5>
+                <p class="card-text text-secondary" style="font-size: 14px;">Card with tabbed navigation in the header.</p>
+                <a href="#" class="btn btn-primary btn-sm">Action</a>
+              </div>
+              <div class="card-footer text-body-secondary">2 days ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alerts, Progress, Breadcrumbs -->
+    <section class="section">
+      <div class="max-width">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="bs-demo-card reveal h-100">
+              <h4><span>Alerts</span><span class="demo-badge badge-bs">Feedback</span></h4>
+              <div class="preview-area">
+                <div class="alert alert-primary" role="alert">A primary alert!</div>
+                <div class="alert alert-success" role="alert">A success alert!</div>
+                <div class="alert alert-danger" role="alert">A danger alert!</div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  Dismissible warning alert!
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="alert alert-info" role="alert">
+                  <h6 class="alert-heading">Alert with heading!</h6>
+                  <p class="mb-0" style="font-size: 13px;">Additional info with a <a href="#" class="alert-link">link</a>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="bs-demo-card reveal reveal-delay-1 h-100">
+              <h4><span>Progress Bars</span><span class="demo-badge badge-bs">Loading</span></h4>
+              <div class="preview-area">
+                <div class="mb-3">
+                  <div class="progress" role="progressbar" aria-label="Basic" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-primary" style="width: 25%">25%</div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="progress" role="progressbar" aria-label="Success" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-success progress-bar-animated" style="width: 50%">50%</div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="progress" role="progressbar" aria-label="Warning" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="height: 8px;">
+                    <div class="progress-bar bg-warning" style="width: 75%"></div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="progress" role="progressbar" aria-label="Striped" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" style="width: 60%">60%</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="progress-stacked">
+                    <div class="progress" role="progressbar" aria-label="Segment one" style="width: 30%">
+                      <div class="progress-bar bg-primary"></div>
+                    </div>
+                    <div class="progress" role="progressbar" aria-label="Segment two" style="width: 40%">
+                      <div class="progress-bar bg-success"></div>
+                    </div>
+                    <div class="progress" role="progressbar" aria-label="Segment three" style="width: 20%">
+                      <div class="progress-bar bg-info"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="bs-demo-card reveal reveal-delay-2 h-100">
+              <h4><span>Breadcrumbs &amp; Pagination</span><span class="demo-badge badge-bs">Nav</span></h4>
+              <div class="preview-area">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Library</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Data</li>
+                  </ol>
+                </nav>
+                <nav aria-label="Page navigation">
+                  <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active" aria-current="page"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                  </ul>
+                </nav>
+                <nav aria-label="Small pagination">
+                  <ul class="pagination pagination-sm">
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navbar Demo -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>Navbar &amp; Navigation</h2>
+        <p>Responsive navigation headers with branding, links, and collapsible menus.</p>
+      </div>
+      <div class="max-width reveal reveal-delay-1">
+        <div class="bs-demo-card">
+          <h4><span>Responsive Navbar</span><span class="demo-badge badge-bs">Nav</span></h4>
+          <div class="preview-area" style="padding: 0; overflow: hidden; border-radius: 12px;">
+            <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+              <div class="container-fluid">
+                <a class="navbar-brand" href="#">Brand</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDemo" aria-controls="navbarDemo" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarDemo">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Something else</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                  </form>
+                </div>
+              </div>
+            </nav>
+          </div>
+          <div class="code-snippet mt-3">&lt;nav class="navbar navbar-expand-lg bg-primary"&gt;
+  &lt;div class="container-fluid"&gt;
+    &lt;a class="navbar-brand" href="#"&gt;Brand&lt;/a&gt;
+    &lt;button class="navbar-toggler" 
+       data-bs-toggle="collapse" 
+       data-bs-target="#navbarNav"&gt;
+      &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;div class="collapse navbar-collapse"&gt;
+      &lt;ul class="navbar-nav"&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link active" href="#"&gt;Home&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Forms & Validation -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>Forms &amp; Validation</h2>
+        <p>Styled form controls with validation states and custom layouts.</p>
+      </div>
+      <div class="max-width">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="bs-demo-card reveal h-100">
+              <h4><span>Form Controls</span><span class="demo-badge badge-bs">Forms</span></h4>
+              <div class="preview-area">
+                <form>
+                  <div class="mb-3">
+                    <label for="bsEmail" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="bsEmail" placeholder="name@example.com">
+                    <div class="form-text">We'll never share your email.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="bsSelect" class="form-label">Example select</label>
+                    <select class="form-select" id="bsSelect">
+                      <option selected>Open this menu</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="bsTextarea" class="form-label">Example textarea</label>
+                    <textarea class="form-control" id="bsTextarea" rows="2"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">Default checkbox</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                      <label class="form-check-label" for="flexCheckChecked">Checked checkbox</label>
+                    </div>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitch">
+                      <label class="form-check-label" for="flexSwitch">Toggle switch</label>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="customRange" class="form-label">Range</label>
+                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange">
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">@</span>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username">
+                  </div>
+                  <div class="input-group">
+                    <input type="file" class="form-control" id="inputGroupFile">
+                    <label class="input-group-text" for="inputGroupFile">Upload</label>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="bs-demo-card reveal reveal-delay-1 h-100">
+              <h4><span>Form Validation</span><span class="demo-badge badge-bs">Validation</span></h4>
+              <div class="preview-area">
+                <form class="was-validated">
+                  <div class="mb-3">
+                    <label for="validationText" class="form-label">Required field</label>
+                    <input type="text" class="form-control is-valid" id="validationText" value="Valid input" required>
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="validationText2" class="form-label">Invalid field</label>
+                    <input type="text" class="form-control is-invalid" id="validationText2" value="" required>
+                    <div class="invalid-feedback">Please provide a valid value.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Radio validation</label>
+                    <div class="form-check">
+                      <input type="radio" class="form-check-input" id="validationRadio1" name="radio-stacked" required>
+                      <label class="form-check-label" for="validationRadio1">Toggle this radio</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input type="radio" class="form-check-input" id="validationRadio2" name="radio-stacked" required>
+                      <label class="form-check-label" for="validationRadio2">Or toggle this</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="invalidCheck" required>
+                      <label class="form-check-label" for="invalidCheck">Agree to terms</label>
+                      <div class="invalid-feedback">You must agree.</div>
+                    </div>
+                  </div>
+                </form>
+                <hr>
+                <div class="row g-2">
+                  <div class="col-md-6">
+                    <label class="form-label">Floating label</label>
+                    <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                      <label for="floatingInput">Email address</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Disabled</label>
+                    <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input" disabled>
+                    <input class="form-control mt-2" type="text" value="Readonly input" aria-label="Readonly input" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accordion, Modal, Tabs -->
+    <section class="section bg-white-section">
+      <div class="max-width">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="bs-demo-card reveal h-100">
+              <h4><span>Accordion</span><span class="demo-badge badge-bs">Collapse</span></h4>
+              <div class="preview-area">
+                <div class="accordion" id="accordionDemo">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Accordion Item #1
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionDemo">
+                      <div class="accordion-body">
+                        <strong>This is the first item.</strong> It is shown by default. Click the other buttons to toggle their visibility.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Accordion Item #2
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionDemo">
+                      <div class="accordion-body">
+                        <strong>This is the second item.</strong> Click the button again to toggle me back.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Accordion Item #3
+                      </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionDemo">
+                      <div class="accordion-body">
+                        <strong>This is the third item.</strong> Only one item is visible at a time.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="bs-demo-card reveal reveal-delay-1 h-100">
+              <h4><span>Modal &amp; Toast</span><span class="demo-badge badge-bs">Overlay</span></h4>
+              <div class="preview-area">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#demoModal">
+                  Launch Demo Modal
+                </button>
+                <button type="button" class="btn btn-secondary mb-3" id="liveToastBtn">Show Toast</button>
+                
+                <hr>
+                
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                    <p class="mt-3" style="font-size: 14px;">This is the Home tab content. Click the other tabs to switch content.</p>
+                  </div>
+                  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                    <p class="mt-3" style="font-size: 14px;">Profile tab content goes here with user information.</p>
+                  </div>
+                  <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                    <p class="mt-3" style="font-size: 14px;">Contact tab with form or contact details.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carousel -->
+    <section class="section">
+      <div class="max-width">
+        <div class="bs-demo-card reveal">
+          <h4><span>Carousel</span><span class="demo-badge badge-bs">Slider</span></h4>
+          <div class="preview-area">
+            <div id="carouselDemo" class="carousel slide carousel-fade" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="3000">
+                  <img src="images/project1.jpg" class="d-block w-100" alt="First slide">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>First Slide</h5>
+                    <p>E-Commerce Dashboard project</p>
+                  </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                  <img src="images/project2.jpg" class="d-block w-100" alt="Second slide">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Second Slide</h5>
+                    <p>Task Manager application</p>
+                  </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                  <img src="images/project3.jpg" class="d-block w-100" alt="Third slide">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Third Slide</h5>
+                    <p>Weather Dashboard project</p>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselDemo" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselDemo" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+          <div class="code-snippet">&lt;div id="carousel" class="carousel slide" data-bs-ride="carousel"&gt;
+  &lt;div class="carousel-inner"&gt;
+    &lt;div class="carousel-item active"&gt;
+      &lt;img src="..." class="d-block w-100"&gt;
+    &lt;/div&gt;
+    &lt;div class="carousel-item"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="carousel-control-prev" 
+     data-bs-target="#carousel" 
+     data-bs-slide="prev"&gt;...&lt;/button&gt;
+&lt;/div&gt;</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tables -->
+    <section class="section bg-white-section">
+      <div class="max-width">
+        <div class="bs-demo-card reveal">
+          <h4><span>Tables</span><span class="demo-badge badge-bs">Data</span></h4>
+          <div class="preview-area">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover align-middle">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Technology</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Version</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>HTML</td>
+                    <td>Markup</td>
+                    <td>5</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>CSS</td>
+                    <td>Stylesheet</td>
+                    <td>3</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>JavaScript</td>
+                    <td>Programming</td>
+                    <td>ES2023</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td>Bootstrap</td>
+                    <td>Framework</td>
+                    <td>5.3</td>
+                    <td><span class="badge bg-primary">Latest</span></td>
+                  </tr>
+                  <tr class="table-primary">
+                    <th scope="row">5</th>
+                    <td>React</td>
+                    <td>Library</td>
+                    <td>18</td>
+                    <td><span class="badge bg-secondary">Learning</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Offcanvas -->
+    <section class="section">
+      <div class="max-width">
+        <div class="bs-demo-card reveal">
+          <h4><span>Offcanvas</span><span class="demo-badge badge-bs">Drawer</span></h4>
+          <div class="preview-area">
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDemo" aria-controls="offcanvasDemo">
+              Toggle Offcanvas
+            </button>
+            <button class="btn btn-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Top</button>
+            <button class="btn btn-info" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">End</button>
+            
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDemo" aria-labelledby="offcanvasLabel">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasLabel">Offcanvas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                <p>Content for the offcanvas goes here. You can place almost any Bootstrap component here.</p>
+                <div class="dropdown mt-3">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">Dropdown button</button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasTopLabel">Top Offcanvas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">Top offcanvas content</div>
+            </div>
+            
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd" aria-labelledby="offcanvasEndLabel">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasEndLabel">End Offcanvas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">End offcanvas content</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal -->
+  <div class="modal fade" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="demoModalLabel">Bootstrap Modal</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>This is a Bootstrap modal dialog. It features a smooth fade-in animation, backdrop overlay, and keyboard dismiss support. Modals are built with HTML, CSS, and JavaScript and are positioned over everything else in the document.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">Bootstrap Toast</strong>
+        <small>Just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Hello, this is a toast notification! It slides in from the corner.
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>My ePortfolio</h3>
+        <p>A comprehensive demonstration of Full Stack Web Development skills, built as a learning portfolio to showcase HTML, CSS, Bootstrap, and JavaScript proficiency.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="fullstack.html">What is Full Stack</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Technologies</h4>
+        <ul class="footer-links">
+          <li><a href="html-demo.html">HTML5</a></li>
+          <li><a href="css-demo.html">CSS3</a></li>
+          <li><a href="bootstrap-demo.html">Bootstrap 5</a></li>
+          <li><a href="js-demo.html">JavaScript</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Thank You</h4>
+        <p style="color: rgba(244,244,244,0.7); font-size: 14px;">Thank you for visiting my ePortfolio. This website was built entirely with HTML5, CSS3, Bootstrap 5, and vanilla JavaScript to demonstrate my understanding of core web technologies.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p> 2024 My ePortfolio. Built with passion for web development education.</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+  
+  <script>
+    // Toast trigger
+    document.getElementById('liveToastBtn').addEventListener('click', function() {
+      const toastEl = document.getElementById('liveToast');
+      const toast = new bootstrap.Toast(toastEl);
+      toast.show();
+    });
+  </script>
+</body>
+</html>

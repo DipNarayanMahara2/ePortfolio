@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive JavaScript demonstrations covering variables, functions, DOM manipulation, events, APIs, async programming, and practical applications.">
+  <title>JavaScript Demonstrations | My ePortfolio</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* JS Demo page specific styles */
+    .js-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 24px;
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .js-demo-card {
+      background-color: var(--bg-secondary);
+      border-radius: var(--border-radius);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(196, 164, 128, 0.3);
+    }
+    
+    .js-demo-card h4 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .js-demo-card .demo-area {
+      background-color: rgba(133, 153, 174, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    
+    .code-snippet {
+      background-color: var(--slate);
+      color: var(--white);
+      font-family: var(--font-code);
+      font-size: 12px;
+      padding: 16px;
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+    
+    /* Console output */
+    .js-console {
+      background-color: #1e1e1e;
+      color: #d4d4d4;
+      font-family: var(--font-code);
+      font-size: 13px;
+      padding: 16px;
+      border-radius: 12px;
+      min-height: 60px;
+      max-height: 150px;
+      overflow-y: auto;
+      line-height: 1.6;
+    }
+    
+    .js-console .log-info { color: #4fc1ff; }
+    .js-console .log-success { color: #4ec9b0; }
+    .js-console .log-error { color: #f48771; }
+    .js-console .log-warn { color: #dcdcaa; }
+    
+    /* Calculator */
+    .calc-display {
+      background-color: #1e1e1e;
+      color: white;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: right;
+      font-size: 24px;
+      font-family: var(--font-code);
+      margin-bottom: 12px;
+      min-height: 60px;
+    }
+    
+    .calc-buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    
+    .calc-btn {
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .calc-btn.number { background-color: rgba(133, 153, 174, 0.2); color: var(--text-primary); }
+    .calc-btn.operator { background-color: var(--forest-green); color: white; }
+    .calc-btn.clear { background-color: rgba(184, 84, 80, 0.2); color: #b85450; }
+    .calc-btn.equals { background-color: var(--soft-blue); color: white; grid-column: span 2; }
+    .calc-btn:hover { opacity: 0.8; transform: translateY(-1px); }
+    .calc-btn:active { transform: scale(0.95); }
+    
+    /* To-do list */
+    .todo-input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    
+    .todo-input-group input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      font-size: 15px;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+    }
+    
+    .todo-input-group input:focus {
+      outline: none;
+      border-color: var(--forest-green);
+    }
+    
+    .todo-list {
+      list-style: none;
+      padding: 0;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    
+    .todo-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background-color: rgba(133, 153, 174, 0.05);
+      border-radius: 8px;
+      margin-bottom: 6px;
+      transition: all 0.2s;
+    }
+    
+    .todo-item.completed .todo-text {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+    
+    .todo-item:hover {
+      background-color: rgba(133, 153, 174, 0.1);
+    }
+    
+    .todo-checkbox {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--forest-green);
+    }
+    
+    .todo-text {
+      flex: 1;
+      font-size: 14px;
+    }
+    
+    .todo-delete {
+      background: none;
+      border: none;
+      color: #b85450;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    
+    .todo-delete:hover { background-color: rgba(184, 84, 80, 0.1); }
+    
+    /* Timer */
+    .timer-display {
+      font-family: var(--font-code);
+      font-size: 36px;
+      text-align: center;
+      color: var(--forest-green);
+      margin-bottom: 16px;
+    }
+    
+    /* Theme toggle demo */
+    .theme-switch {
+      width: 60px;
+      height: 30px;
+      background-color: var(--muted-grey);
+      border-radius: 15px;
+      position: relative;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .theme-switch.active {
+      background-color: var(--forest-green);
+    }
+    
+    .theme-switch::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
+      background-color: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+    
+    .theme-switch.active::after {
+      transform: translateX(30px);
+    }
+    
+    /* Counter animation */
+    .counter-display {
+      font-family: var(--font-display);
+      font-size: 48px;
+      color: var(--forest-green);
+      text-align: center;
+    }
+    
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    
+    .gallery-grid img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+    
+    /* DOM manipulation target */
+    .dom-target {
+      padding: 20px;
+      background-color: var(--soft-blue);
+      color: white;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    /* Search filter */
+    .search-filter-input {
+      width: 100%;
+      padding: 10px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+    }
+    
+    .filter-list {
+      list-style: none;
+      padding: 0;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    
+    .filter-list li {
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-bottom: 4px;
+      background-color: rgba(133, 153, 174, 0.05);
+      font-size: 14px;
+    }
+    
+    .filter-list li.hidden {
+      display: none;
+    }
+    
+    @media (max-width: 767px) {
+      .js-grid {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Page Loader -->
+  <div class="page-loader" role="status" aria-label="Loading page">
+    <div class="loader-shape"></div>
+  </div>
+
+  <!-- Fixed Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="site-logo">My ePortfolio</a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="fullstack.html" class="nav-link">Full Stack</a>
+        <a href="html-demo.html" class="nav-link">HTML</a>
+        <a href="css-demo.html" class="nav-link">CSS</a>
+        <a href="bootstrap-demo.html" class="nav-link">Bootstrap</a>
+        <a href="js-demo.html" class="nav-link active">JavaScript</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="fullstack.html" class="nav-link">Full Stack</a>
+      <a href="html-demo.html" class="nav-link">HTML</a>
+      <a href="css-demo.html" class="nav-link">CSS</a>
+      <a href="bootstrap-demo.html" class="nav-link">Bootstrap</a>
+      <a href="js-demo.html" class="nav-link active">JavaScript</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    
+    <!-- Page Hero -->
+    <section class="hero page-hero">
+      <div class="hero-content reveal">
+        <h1>JavaScript Demonstrations</h1>
+        <p>JavaScript brings web pages to life. Explore variables, functions, DOM manipulation, asynchronous programming, APIs, and build interactive mini-applications.</p>
+      </div>
+    </section>
+
+    <!-- Fundamentals -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>JavaScript Fundamentals</h2>
+        <p>Core language features that form the foundation of JS programming.</p>
+      </div>
+      <div class="js-grid">
+        <!-- Variables & Data Types -->
+        <div class="js-demo-card reveal">
+          <h4><span>Variables &amp; Data Types</span><span class="demo-badge badge-js">Core</span></h4>
+          <div class="demo-area">
+            <button class="btn btn-primary btn-sm me-2" onclick="demoVariables()">Run Demo</button>
+            <button class="btn btn-outline btn-sm" onclick="clearConsole('varConsole')">Clear</button>
+            <div class="js-console mt-3" id="varConsole">
+              <span class="text-secondary">Click "Run Demo" to see variables, let, const, and data types in action...</span>
+            </div>
+          </div>
+          <div class="code-snippet">// Variable declarations
+var oldWay = 'function scoped';
+let mutable = 'block scoped';
+const constant = 'cannot reassign';
+
+// Data types
+const string = 'Hello World';
+const number = 42;
+const boolean = true;
+const array = [1, 2, 3];
+const object = { name: 'John', age: 30 };
+const nullVal = null;
+let undefinedVal;
+
+// Template literals
+const greeting = \`Hello, \${object.name}!\`;</div>
+        </div>
+        
+        <!-- Operators & Conditionals -->
+        <div class="js-demo-card reveal reveal-delay-1">
+          <h4><span>Operators &amp; Conditionals</span><span class="demo-badge badge-js">Logic</span></h4>
+          <div class="demo-area">
+            <div class="mb-3">
+              <input type="number" id="condAge" placeholder="Enter your age" class="form-control mb-2" style="max-width: 200px; display: inline-block;">
+              <button class="btn btn-primary btn-sm" onclick="demoConditionals()">Check</button>
+            </div>
+            <div class="js-console" id="condConsole">
+              <span class="text-secondary">Enter an age to see conditionals and switch in action...</span>
+            </div>
+          </div>
+          <div class="code-snippet">// Comparison operators
+const age = 18;
+if (age >= 18) {
+  console.log('Adult');
+} else if (age >= 13) {
+  console.log('Teenager');
+} else {
+  console.log('Child');
+}
+
+// Ternary operator
+const status = age >= 18 ? 'Adult' : 'Minor';
+
+// Switch statement
+switch (day) {
+  case 1: console.log('Monday'); break;
+  case 2: console.log('Tuesday'); break;
+  default: console.log('Weekend');
+}</div>
+        </div>
+        
+        <!-- Loops -->
+        <div class="js-demo-card reveal reveal-delay-2">
+          <h4><span>Loops</span><span class="demo-badge badge-js">Iteration</span></h4>
+          <div class="demo-area">
+            <button class="btn btn-primary btn-sm me-2" onclick="demoLoops()">Run Loops</button>
+            <button class="btn btn-outline btn-sm" onclick="clearConsole('loopConsole')">Clear</button>
+            <div class="js-console mt-3" id="loopConsole">
+              <span class="text-secondary">Click "Run Loops" to see for, while, do-while, for...of, and forEach...</span>
+            </div>
+          </div>
+          <div class="code-snippet">// for loop
+for (let i = 0; i < 5; i++) {
+  console.log(i); // 0, 1, 2, 3, 4
+}
+
+// while loop
+let count = 0;
+while (count < 3) {
+  console.log(count++);
+}
+
+// do...while loop
+do { console.log('runs at least once'); }
+while (false);
+
+// for...of (iterables)
+for (const item of ['a', 'b', 'c']) {
+  console.log(item);
+}
+
+// forEach (arrays)
+[1, 2, 3].forEach((n, i) => console.log(i, n));</div>
+        </div>
+        
+        <!-- Functions -->
+        <div class="js-demo-card reveal reveal-delay-3">
+          <h4><span>Functions</span><span class="demo-badge badge-js">Functions</span></h4>
+          <div class="demo-area">
+            <button class="btn btn-primary btn-sm me-2" onclick="demoFunctions()">Run Functions</button>
+            <button class="btn btn-outline btn-sm" onclick="clearConsole('funcConsole')">Clear</button>
+            <div class="js-console mt-3" id="funcConsole">
+              <span class="text-secondary">Click "Run Functions" to see declarations, expressions, arrow functions, and closures...</span>
+            </div>
+          </div>
+          <div class="code-snippet">// Function declaration
+function greet(name) {
+  return \`Hello, \${name}!\`;
+}
+
+// Function expression
+const add = function(a, b) {
+  return a + b;
+};
+
+// Arrow function
+const multiply = (a, b) => a * b;
+
+// Default parameters
+const greetUser = (name = 'Guest') => 
+  \`Welcome, \${name}!\`;
+
+// Closure
+function counter() {
+  let count = 0;
+  return () => ++count;
+}</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Arrays & Objects -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>Arrays &amp; Objects</h2>
+        <p>Working with complex data structures and modern ES6+ features.</p>
+      </div>
+      <div class="js-grid">
+        <!-- Array Methods -->
+        <div class="js-demo-card reveal">
+          <h4><span>Array Methods</span><span class="demo-badge badge-js">Arrays</span></h4>
+          <div class="demo-area">
+            <button class="btn btn-primary btn-sm me-2" onclick="demoArrays()">Run Array Demo</button>
+            <button class="btn btn-outline btn-sm" onclick="clearConsole('arrConsole')">Clear</button>
+            <div class="js-console mt-3" id="arrConsole">
+              <span class="text-secondary">Click to see map, filter, reduce, find, sort, and more...</span>
+            </div>
+          </div>
+          <div class="code-snippet">const nums = [1, 2, 3, 4, 5];
+
+// map - transform each element
+const doubled = nums.map(n => n * 2);
+// [2, 4, 6, 8, 10]
+
+// filter - keep matching elements
+const evens = nums.filter(n => n % 2 === 0);
+// [2, 4]
+
+// reduce - accumulate to single value
+const sum = nums.reduce((acc, n) => acc + n, 0);
+// 15
+
+// find - first matching element
+const firstEven = nums.find(n => n % 2 === 0);
+// 2
+
+// includes, slice, splice, concat, spread</div>
+        </div>
+        
+        <!-- Objects & Destructuring -->
+        <div class="js-demo-card reveal reveal-delay-1">
+          <h4><span>Objects, Destructuring &amp; Spread</span><span class="demo-badge badge-js">ES6+</span></h4>
+          <div class="demo-area">
+            <button class="btn btn-primary btn-sm me-2" onclick="demoObjects()">Run Object Demo</button>
+            <button class="btn btn-outline btn-sm" onclick="clearConsole('objConsole')">Clear</button>
+            <div class="js-console mt-3" id="objConsole">
+              <span class="text-secondary">Click to see object methods, destructuring, spread, and rest operators...</span>
+            </div>
+          </div>
+          <div class="code-snippet">// Object shorthand
+const name = 'Alice';
+const user = { name, age: 25 };
+
+// Destructuring
+const { name, age } = user;
+const [first, second] = [10, 20];
+
+// Spread operator
+const arr1 = [1, 2];
+const arr2 = [...arr1, 3, 4]; // [1, 2, 3, 4]
+const obj2 = { ...user, city: 'London' };
+
+// Rest parameters
+const sumAll = (...numbers) => 
+  numbers.reduce((a, b) => a + b, 0);
+
+// Object methods
+const keys = Object.keys(user);
+const values = Object.values(user);
+const entries = Object.entries(user);</div>
+        </div>
+        
+        <!-- Classes -->
+        <div class="js-demo-card reveal reveal-delay-2">
+          <h4><span>Classes &amp; OOP</span><span class="demo-badge badge-js">OOP</span></h4>
+          <div class="demo-area">
+            <button class="btn btn-primary btn-sm me-2" onclick="demoClasses()">Run Class Demo</button>
+            <button class="btn btn-outline btn-sm" onclick="clearConsole('classConsole')">Clear</button>
+            <div class="js-console mt-3" id="classConsole">
+              <span class="text-secondary">Click to see class definitions, constructors, methods, inheritance...</span>
+            </div>
+          </div>
+          <div class="code-snippet">class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  
+  greet() {
+    return \`Hi, I'm \${this.name}\`;
+  }
+  
+  static isAdult(age) {
+    return age >= 18;
+  }
+}
+
+class Developer extends Person {
+  constructor(name, age, lang) {
+    super(name, age);
+    this.language = lang;
+  }
+  
+  code() {
+    return \`\${this.name} codes in \${this.language}\`;
+  }
+}</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOM Manipulation -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>DOM Manipulation</h2>
+        <p>Selecting and modifying HTML elements dynamically with JavaScript.</p>
+      </div>
+      <div class="js-grid">
+        <!-- DOM Selection -->
+        <div class="js-demo-card reveal">
+          <h4><span>DOM Selection &amp; Manipulation</span><span class="demo-badge badge-js">DOM</span></h4>
+          <div class="demo-area">
+            <div class="dom-target" id="domTarget">Target Element</div>
+            <div class="mt-3 d-flex flex-wrap gap-2">
+              <button class="btn btn-primary btn-sm" onclick="changeDomColor()">Change Colour</button>
+              <button class="btn btn-secondary btn-sm" onclick="changeDomText()">Change Text</button>
+              <button class="btn btn-info btn-sm" onclick="toggleDomVisibility()">Toggle</button>
+              <button class="btn btn-warning btn-sm" onclick="animateDom()">Animate</button>
+              <button class="btn btn-outline btn-sm" onclick="resetDom()">Reset</button>
+            </div>
+          </div>
+          <div class="code-snippet">// Selection methods
+const byId = document.getElementById('id');
+const byClass = document.querySelector('.class');
+const allMatches = document.querySelectorAll('div');
+
+// Modification
+element.textContent = 'New text';
+element.innerHTML = '&lt;strong&gt;HTML&lt;/strong&gt;';
+element.style.color = 'red';
+element.classList.add('active');
+element.classList.remove('hidden');
+element.classList.toggle('visible');
+element.setAttribute('data-value', '123');</div>
+        </div>
+        
+        <!-- Events -->
+        <div class="js-demo-card reveal reveal-delay-1">
+          <h4><span>Event Listeners</span><span class="demo-badge badge-js">Events</span></h4>
+          <div class="demo-area">
+            <div id="eventBox" style="padding: 30px; background-color: var(--soft-blue); color: white; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s; user-select: none;">
+              Interact with me!
+            </div>
+            <div class="js-console mt-3" id="eventConsole" style="min-height: 40px; max-height: 100px;">
+              <span class="text-secondary">Click, double-click, right-click, or hover the box above...</span>
+            </div>
+          </div>
+          <div class="code-snippet">// Event listeners
+element.addEventListener('click', handler);
+element.addEventListener('mouseover', handler);
+element.addEventListener('keydown', handler);
+element.addEventListener('submit', handler);
+
+// Event object
+function handler(event) {
+  event.preventDefault();
+  event.target.style.color = 'red';
+}
+
+// Event delegation
+parent.addEventListener('click', (e) => {
+  if (e.target.matches('.button')) {
+    // Handle button click
+  }
+});</div>
+        </div>
+        
+        <!-- Form Validation -->
+        <div class="js-demo-card reveal reveal-delay-2">
+          <h4><span>Form Validation</span><span class="demo-badge badge-js">Forms</span></h4>
+          <div class="demo-area">
+            <form id="jsValidationForm" onsubmit="return validateDemoForm(event)">
+              <div class="mb-2">
+                <input type="text" id="jsValName" class="form-control" placeholder="Name (required, min 3 chars)" style="font-size: 14px;">
+                <div id="jsValNameError" class="text-danger" style="font-size: 12px; display: none;">Name must be at least 3 characters</div>
+              </div>
+              <div class="mb-2">
+                <input type="email" id="jsValEmail" class="form-control" placeholder="Email (valid format)" style="font-size: 14px;">
+                <div id="jsValEmailError" class="text-danger" style="font-size: 12px; display: none;">Please enter a valid email</div>
+              </div>
+              <div class="mb-2">
+                <input type="password" id="jsValPass" class="form-control" placeholder="Password (min 8 chars)" style="font-size: 14px;">
+                <div id="jsValPassError" class="text-danger" style="font-size: 12px; display: none;">Password must be at least 8 characters</div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm">Validate</button>
+              <div id="jsValSuccess" class="text-success mt-2" style="font-size: 13px; display: none;">All fields valid!</div>
+            </form>
+          </div>
+          <div class="code-snippet">function validateForm(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  
+  // Regex validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+  if (name.length < 3) {
+    showError('Name too short');
+    return false;
+  }
+  
+  if (!emailRegex.test(email)) {
+    showError('Invalid email');
+    return false;
+  }
+  
+  return true;
+}</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Async Programming -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>Asynchronous JavaScript</h2>
+        <p>Timers, Promises, async/await, and API calls for non-blocking operations.</p>
+      </div>
+      <div class="js-grid">
+        <!-- Timers -->
+        <div class="js-demo-card reveal">
+          <h4><span>Timers &amp; Intervals</span><span class="demo-badge badge-js">Timing</span></h4>
+          <div class="demo-area">
+            <div class="timer-display" id="timerDisplay">00:00:00</div>
+            <div class="d-flex gap-2 justify-content-center flex-wrap">
+              <button class="btn btn-primary btn-sm" id="timerStart" onclick="startTimer()">Start</button>
+              <button class="btn btn-secondary btn-sm" onclick="stopTimer()">Stop</button>
+              <button class="btn btn-outline btn-sm" onclick="resetTimer()">Reset</button>
+              <button class="btn btn-info btn-sm" onclick="demoTimeout()">setTimeout Demo</button>
+            </div>
+            <div class="js-console mt-3" id="timerConsole">
+              <span class="text-secondary">Use the stopwatch or click setTimeout Demo...</span>
+            </div>
+          </div>
+          <div class="code-snippet">// setTimeout - runs once after delay
+setTimeout(() => {
+  console.log('Runs after 2 seconds');
+}, 2000);
+
+// setInterval - runs repeatedly
+const intervalId = setInterval(() => {
+  console.log('Runs every second');
+}, 1000);
+
+// Clear timers
+clearTimeout(timeoutId);
+clearInterval(intervalId);
+
+// Countdown timer
+let seconds = 10;
+const countdown = setInterval(() => {
+  console.log(seconds--);
+  if (seconds < 0) clearInterval(countdown);
+}, 1000);</div>
+        </div>
+        
+        <!-- Fetch API -->
+        <div class="js-demo-card reveal reveal-delay-1">
+          <h4><span>Fetch API &amp; Async/Await</span><span class="demo-badge badge-js">API</span></h4>
+          <div class="demo-area">
+            <button class="btn btn-primary btn-sm me-2" onclick="fetchUsers()">Fetch Users</button>
+            <button class="btn btn-secondary btn-sm me-2" onclick="fetchPosts()">Fetch Posts</button>
+            <button class="btn btn-outline btn-sm" onclick="clearConsole('fetchConsole')">Clear</button>
+            <div class="js-console mt-3" id="fetchConsole">
+              <span class="text-secondary">Click "Fetch Users" or "Fetch Posts" to call a public API using fetch()...</span>
+            </div>
+          </div>
+          <div class="code-snippet">// Fetch with promises
+fetch('https://jsonplaceholder.typicode.com/users')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+
+// Fetch with async/await
+async function getUsers() {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Failed');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}</div>
+        </div>
+        
+        <!-- Promises -->
+        <div class="js-demo-card reveal reveal-delay-2">
+          <h4><span>Promises &amp; Error Handling</span><span class="demo-badge badge-js">Async</span></h4>
+          <div class="demo-area">
+            <button class="btn btn-primary btn-sm me-2" onclick="demoPromises()">Run Promise Demo</button>
+            <button class="btn btn-outline btn-sm" onclick="clearConsole('promiseConsole')">Clear</button>
+            <div class="js-console mt-3" id="promiseConsole">
+              <span class="text-secondary">Click to see Promise creation, .then/.catch chaining, Promise.all...</span>
+            </div>
+          </div>
+          <div class="code-snippet">// Creating a Promise
+const fetchData = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    const success = true;
+    success ? resolve('Data loaded!') 
+            : reject('Error!');
+  }, 1000);
+});
+
+// Chaining
+fetchData
+  .then(data => data.toUpperCase())
+  .then(upper => console.log(upper))
+  .catch(err => console.error(err))
+  .finally(() => console.log('Done'));
+
+// Promise.all
+Promise.all([promise1, promise2])
+  .then(results => console.log(results));</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mini Applications -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>Interactive Applications</h2>
+        <p>Practical JavaScript applications demonstrating real-world programming patterns.</p>
+      </div>
+      <div class="js-grid">
+        <!-- Calculator -->
+        <div class="js-demo-card reveal">
+          <h4><span>Calculator</span><span class="demo-badge badge-js">App</span></h4>
+          <div class="demo-area">
+            <div class="calc-display" id="calcDisplay">0</div>
+            <div class="calc-buttons">
+              <button class="calc-btn clear" onclick="calcClear()">C</button>
+              <button class="calc-btn operator" onclick="calcOp('/')">/</button>
+              <button class="calc-btn operator" onclick="calcOp('*')">x</button>
+              <button class="calc-btn operator" onclick="calcOp('-')">-</button>
+              <button class="calc-btn number" onclick="calcNum('7')">7</button>
+              <button class="calc-btn number" onclick="calcNum('8')">8</button>
+              <button class="calc-btn number" onclick="calcNum('9')">9</button>
+              <button class="calc-btn operator" onclick="calcOp('+')">+</button>
+              <button class="calc-btn number" onclick="calcNum('4')">4</button>
+              <button class="calc-btn number" onclick="calcNum('5')">5</button>
+              <button class="calc-btn number" onclick="calcNum('6')">6</button>
+              <button class="calc-btn operator" onclick="calcOp('%')">%</button>
+              <button class="calc-btn number" onclick="calcNum('1')">1</button>
+              <button class="calc-btn number" onclick="calcNum('2')">2</button>
+              <button class="calc-btn number" onclick="calcNum('3')">3</button>
+              <button class="calc-btn number" onclick="calcNum('.')">.</button>
+              <button class="calc-btn number" onclick="calcNum('0')">0</button>
+              <button class="calc-btn equals" onclick="calcEquals()">=</button>
+            </div>
+          </div>
+          <div class="code-snippet">// Calculator logic
+let current = '0', previous = '', operation = null;
+
+function calculate(a, b, op) {
+  switch(op) {
+    case '+': return a + b;
+    case '-': return a - b;
+    case '*': return a * b;
+    case '/': return b !== 0 ? a / b : 'Error';
+    case '%': return a % b;
+  }
+}</div>
+        </div>
+        
+        <!-- To-Do List -->
+        <div class="js-demo-card reveal reveal-delay-1">
+          <h4><span>To-Do List (localStorage)</span><span class="demo-badge badge-js">App</span></h4>
+          <div class="demo-area">
+            <div class="todo-input-group">
+              <input type="text" id="todoInput" placeholder="Add a new task..." onkeypress="if(event.key==='Enter') addTodo()">
+              <button class="btn btn-primary" onclick="addTodo()">Add</button>
+            </div>
+            <ul class="todo-list" id="todoList">
+              <li class="todo-item">
+                <input type="checkbox" class="todo-checkbox" onchange="toggleTodo(this)">
+                <span class="todo-text">Learn JavaScript arrays</span>
+                <button class="todo-delete" onclick="deleteTodo(this)">&times;</button>
+              </li>
+              <li class="todo-item completed">
+                <input type="checkbox" class="todo-checkbox" checked onchange="toggleTodo(this)">
+                <span class="todo-text">Set up HTML structure</span>
+                <button class="todo-delete" onclick="deleteTodo(this)">&times;</button>
+              </li>
+            </ul>
+            <div style="display: flex; justify-content: space-between; margin-top: 12px;">
+              <span style="font-size: 13px; color: var(--text-secondary);" id="todoCount">1 item left</span>
+              <button class="btn btn-outline btn-sm" onclick="clearCompleted()">Clear Completed</button>
+            </div>
+          </div>
+          <div class="code-snippet">// localStorage persistence
+function saveTodos() {
+  localStorage.setItem('todos', 
+    JSON.stringify(todos));
+}
+
+function loadTodos() {
+  const stored = localStorage.getItem('todos');
+  return stored ? JSON.parse(stored) : [];
+}
+
+// CRUD operations
+function addTodo(text) { /* ... */ }
+function toggleTodo(id) { /* ... */ }
+function deleteTodo(id) { /* ... */ }</div>
+        </div>
+        
+        <!-- Search & Filter -->
+        <div class="js-demo-card reveal reveal-delay-2">
+          <h4><span>Dynamic Search &amp; Filter</span><span class="demo-badge badge-js">Search</span></h4>
+          <div class="demo-area">
+            <input type="text" class="search-filter-input" id="searchInput" placeholder="Search technologies..." oninput="filterItems()">
+            <ul class="filter-list" id="filterList">
+              <li>HTML5 - HyperText Markup Language</li>
+              <li>CSS3 - Cascading Style Sheets</li>
+              <li>JavaScript - Programming Language</li>
+              <li>Bootstrap - CSS Framework</li>
+              <li>React - UI Library</li>
+              <li>Node.js - Runtime Environment</li>
+              <li>Git - Version Control</li>
+              <li>npm - Package Manager</li>
+            </ul>
+          </div>
+          <div class="code-snippet">// Real-time search filtering
+searchInput.addEventListener('input', (e) => {
+  const term = e.target.value.toLowerCase();
+  
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    item.classList.toggle('hidden', 
+      !text.includes(term));
+  });
+});
+
+// Debounced search
+const debouncedSearch = debounce(
+  performSearch, 300
+);</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- More Interactive Demos -->
+    <section class="section bg-white-section">
+      <div class="js-grid">
+        <!-- Theme Switcher -->
+        <div class="js-demo-card reveal">
+          <h4><span>Theme Switcher</span><span class="demo-badge badge-js">UI</span></h4>
+          <div class="demo-area">
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+              <span style="font-size: 14px;">Light</span>
+              <div class="theme-switch" id="demoThemeSwitch" onclick="toggleDemoTheme()"></div>
+              <span style="font-size: 14px;">Dark</span>
+            </div>
+            <div id="themeDemoBox" style="padding: 20px; border-radius: 12px; background-color: #e8e5d6; color: #231f20; transition: all 0.3s;">
+              <p style="margin: 0; font-size: 14px;">This box changes colour when you toggle the switch. The theme preference is saved to localStorage.</p>
+            </div>
+          </div>
+          <div class="code-snippet">// Theme toggle with localStorage
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList
+    .contains('dark-mode');
+  localStorage.setItem('theme', 
+    isDark ? 'dark' : 'light');
+}
+
+// Load saved preference
+const saved = localStorage.getItem('theme');
+if (saved === 'dark') toggleTheme();</div>
+        </div>
+        
+        <!-- Animated Counter -->
+        <div class="js-demo-card reveal reveal-delay-1">
+          <h4><span>Animated Counter</span><span class="demo-badge badge-js">Animation</span></h4>
+          <div class="demo-area">
+            <div class="counter-display" id="animCounter" data-target="1000">0</div>
+            <div class="d-flex gap-2 justify-content-center">
+              <button class="btn btn-primary btn-sm" onclick="animateCounter(document.getElementById('animCounter'), 1000, 2000)">Count to 1000</button>
+              <button class="btn btn-secondary btn-sm" onclick="animateCounter(document.getElementById('animCounter'), 5000, 3000)">Count to 5000</button>
+              <button class="btn btn-outline btn-sm" onclick="document.getElementById('animCounter').textContent = '0'">Reset</button>
+            </div>
+          </div>
+          <div class="code-snippet">// Animated counter with easing
+function animateCounter(el, target, duration) {
+  const start = performance.now();
+  
+  function update(time) {
+    const elapsed = time - start;
+    const progress = Math.min(elapsed/duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(target * eased);
+    
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  
+  requestAnimationFrame(update);
+}</div>
+        </div>
+        
+        <!-- JSON Demo -->
+        <div class="js-demo-card reveal reveal-delay-2">
+          <h4><span>JSON (JavaScript Object Notation)</span><span class="demo-badge badge-js">Data</span></h4>
+          <div class="demo-area">
+            <button class="btn btn-primary btn-sm me-2" onclick="demoJSON()">Run JSON Demo</button>
+            <button class="btn btn-outline btn-sm" onclick="clearConsole('jsonConsole')">Clear</button>
+            <div class="js-console mt-3" id="jsonConsole">
+              <span class="text-secondary">Click to see JSON.stringify, JSON.parse, and working with JSON data...</span>
+            </div>
+          </div>
+          <div class="code-snippet">// Object to JSON string
+const user = { name: 'Alice', age: 25 };
+const jsonString = JSON.stringify(user);
+// '{"name":"Alice","age":25}'
+
+// JSON string to object
+const parsed = JSON.parse(jsonString);
+// { name: 'Alice', age: 25 }
+
+// Pretty print
+JSON.stringify(user, null, 2);
+
+// With localStorage
+localStorage.setItem('user', JSON.stringify(user));
+const loaded = JSON.parse(
+  localStorage.getItem('user')
+);</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="section">
+      <div class="max-width reveal">
+        <h2 class="text-center mb-5">FAQ Accordion (Event Delegation)</h2>
+        <div class="accordion" id="jsFaqAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button">
+                What is the difference between let and const?
+              </button>
+            </h2>
+            <div class="accordion-collapse">
+              <div class="accordion-body">
+                <code>let</code> declares a block-scoped variable that can be reassigned. <code>const</code> declares a block-scoped variable that cannot be reassigned (though objects and arrays declared with const can still be mutated). Both are preferable to <code>var</code>, which is function-scoped and hoistable.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button">
+                What is the DOM and how do you manipulate it?
+              </button>
+            </h2>
+            <div class="accordion-collapse">
+              <div class="accordion-body">
+                The DOM (Document Object Model) is a tree-like representation of an HTML document. JavaScript can manipulate it using methods like <code>document.getElementById()</code>, <code>document.querySelector()</code>, and <code>document.querySelectorAll()</code> to select elements, then modify their content, styles, attributes, or structure.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button">
+                What is event delegation and why is it useful?
+              </button>
+            </h2>
+            <div class="accordion-collapse">
+              <div class="accordion-body">
+                Event delegation is a technique where a single event listener is attached to a parent element to handle events for all its children. It's efficient because you only need one listener instead of many, and it automatically works for dynamically added elements. Use <code>event.target</code> to identify which child triggered the event.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button">
+                How does async/await work in JavaScript?
+              </button>
+            </h2>
+            <div class="accordion-collapse">
+              <div class="accordion-body">
+                <code>async/await</code> is syntactic sugar over Promises. An <code>async</code> function always returns a Promise. Inside it, you can use <code>await</code> to pause execution until a Promise resolves, making asynchronous code read like synchronous code. This improves readability and error handling with try/catch blocks.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button">
+                What is localStorage and when should it be used?
+              </button>
+            </h2>
+            <div class="accordion-collapse">
+              <div class="accordion-body">
+                <code>localStorage</code> is a Web Storage API that stores key-value pairs persistently in the browser (until explicitly cleared). It's useful for saving user preferences, caching data, or storing application state. Data is limited to ~5MB per origin and only stores strings (use JSON.stringify/parse for objects). For session-only storage, use <code>sessionStorage</code>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>My ePortfolio</h3>
+        <p>A comprehensive demonstration of Full Stack Web Development skills, built as a learning portfolio to showcase HTML, CSS, Bootstrap, and JavaScript proficiency.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="fullstack.html">What is Full Stack</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Technologies</h4>
+        <ul class="footer-links">
+          <li><a href="html-demo.html">HTML5</a></li>
+          <li><a href="css-demo.html">CSS3</a></li>
+          <li><a href="bootstrap-demo.html">Bootstrap 5</a></li>
+          <li><a href="js-demo.html">JavaScript</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Thank You</h4>
+        <p style="color: rgba(244,244,244,0.7); font-size: 14px;">Thank you for visiting my ePortfolio. This website was built entirely with HTML5, CSS3, Bootstrap 5, and vanilla JavaScript to demonstrate my understanding of core web technologies.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p> 2024 My ePortfolio. Built with passion for web development education.</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+  
+  <script>
+    // ===== CONSOLE HELPER =====
+    function logToConsole(elementId, message, type = 'info') {
+      const console = document.getElementById(elementId);
+      const line = document.createElement('div');
+      line.className = `log-${type}`;
+      line.textContent = `> ${message}`;
+      console.appendChild(line);
+      console.scrollTop = console.scrollHeight;
+    }
+    
+    function clearConsole(elementId) {
+      document.getElementById(elementId).innerHTML = '';
+    }
+    
+    // ===== VARIABLES DEMO =====
+    function demoVariables() {
+      const console = 'varConsole';
+      clearConsole(console);
+      
+      // var (function scoped)
+      var x = 10;
+      logToConsole(console, `var x = ${x} (function scoped, hoisted)`);
+      
+      // let (block scoped)
+      let y = 20;
+      logToConsole(console, `let y = ${y} (block scoped, reassignable)`);
+      y = 25;
+      logToConsole(console, `y reassigned = ${y}`);
+      
+      // const (block scoped, not reassignable)
+      const z = 30;
+      logToConsole(console, `const z = ${z} (block scoped, constant)`);
+      
+      // Data types
+      logToConsole(console, `typeof "hello" = ${typeof "hello"} (string)`);
+      logToConsole(console, `typeof 42 = ${typeof 42} (number)`);
+      logToConsole(console, `typeof true = ${typeof true} (boolean)`);
+      logToConsole(console, `typeof [] = ${typeof []} (object - array)`);
+      logToConsole(console, `typeof {{}} = ${typeof {}} (object)`);
+      logToConsole(console, `typeof null = ${typeof null} (object - known bug)`);
+      logToConsole(console, `typeof undefined = ${typeof undefined}`);
+      
+      // Template literals
+      const name = 'Developer';
+      logToConsole(console, `Template: \`Hello, ${name}!\` = "Hello, ${name}!"`, 'success');
+    }
+    
+    // ===== CONDITIONALS DEMO =====
+    function demoConditionals() {
+      const console = 'condConsole';
+      const ageInput = document.getElementById('condAge');
+      const age = parseInt(ageInput.value);
+      clearConsole(console);
+      
+      if (isNaN(age)) {
+        logToConsole(console, 'Please enter a valid number', 'error');
+        return;
+      }
+      
+      logToConsole(console, `Age entered: ${age}`);
+      
+      // if/else if/else
+      if (age >= 18) {
+        logToConsole(console, 'if (age >= 18): You are an adult', 'success');
+      } else if (age >= 13) {
+        logToConsole(console, 'else if (age >= 13): You are a teenager');
+      } else {
+        logToConsole(console, 'else: You are a child');
+      }
+      
+      // Ternary
+      const canVote = age >= 18 ? 'Yes' : 'No';
+      logToConsole(console, `Ternary: canVote = "${canVote}"`);
+      
+      // Switch
+      const day = new Date().getDay();
+      let dayName;
+      switch(day) {
+        case 0: dayName = 'Sunday'; break;
+        case 1: dayName = 'Monday'; break;
+        case 2: dayName = 'Tuesday'; break;
+        case 3: dayName = 'Wednesday'; break;
+        case 4: dayName = 'Thursday'; break;
+        case 5: dayName = 'Friday'; break;
+        case 6: dayName = 'Saturday'; break;
+        default: dayName = 'Unknown';
+      }
+      logToConsole(console, `switch: Today is ${dayName}`, 'success');
+    }
+    
+    // ===== LOOPS DEMO =====
+    function demoLoops() {
+      const console = 'loopConsole';
+      clearConsole(console);
+      
+      // for loop
+      let output = 'for (let i=0; i<5; i++): ';
+      for (let i = 0; i < 5; i++) { output += i + ' '; }
+      logToConsole(console, output);
+      
+      // while loop
+      let count = 0;
+      output = 'while (count < 3): ';
+      while (count < 3) { output += count++ + ' '; }
+      logToConsole(console, output);
+      
+      // do...while
+      let num = 0;
+      output = 'do...while (num < 1): ';
+      do { output += num++; } while (num < 1);
+      logToConsole(console, output);
+      
+      // for...of
+      const fruits = ['apple', 'banana', 'cherry'];
+      output = 'for...of [fruits]: ';
+      for (const fruit of fruits) { output += fruit + ' '; }
+      logToConsole(console, output);
+      
+      // forEach
+      output = 'forEach [1,2,3]: ';
+      [1, 2, 3].forEach((n, i) => { output += `[${i}]=${n} `; });
+      logToConsole(console, output);
+      
+      // map (creates new array)
+      const doubled = [1, 2, 3].map(n => n * 2);
+      logToConsole(console, `[1,2,3].map(n=>n*2) = [${doubled}]`, 'success');
+    }
+    
+    // ===== FUNCTIONS DEMO =====
+    function demoFunctions() {
+      const console = 'funcConsole';
+      clearConsole(console);
+      
+      // Function declaration
+      function greet(name) { return `Hello, ${name}!`; }
+      logToConsole(console, `Declaration: greet("World") = "${greet('World')}"`);
+      
+      // Function expression
+      const add = function(a, b) { return a + b; };
+      logToConsole(console, `Expression: add(5, 3) = ${add(5, 3)}`);
+      
+      // Arrow function
+      const multiply = (a, b) => a * b;
+      logToConsole(console, `Arrow: multiply(4, 7) = ${multiply(4, 7)}`);
+      
+      // Default parameters
+      const greetUser = (name = 'Guest') => `Welcome, ${name}!`;
+      logToConsole(console, `Default: greetUser() = "${greetUser()}"`);
+      logToConsole(console, `Default: greetUser("Alice") = "${greetUser("Alice")}"`);
+      
+      // Closure
+      function createCounter() {
+        let count = 0;
+        return () => ++count;
+      }
+      const counter = createCounter();
+      logToConsole(console, `Closure: counter() = ${counter()}`);
+      logToConsole(console, `Closure: counter() = ${counter()}`);
+      logToConsole(console, `Closure: counter() = ${counter()} (preserves state)`, 'success');
+    }
+    
+    // ===== ARRAYS DEMO =====
+    function demoArrays() {
+      const console = 'arrConsole';
+      clearConsole(console);
+      
+      const nums = [1, 2, 3, 4, 5];
+      logToConsole(console, `Original: [${nums}]`);
+      
+      // map
+      logToConsole(console, `.map(n=>n*2) = [${nums.map(n => n * 2)}]`);
+      
+      // filter
+      logToConsole(console, `.filter(n=>n%2===0) = [${nums.filter(n => n % 2 === 0)}]`);
+      
+      // reduce
+      logToConsole(console, `.reduce((a,n)=>a+n, 0) = ${nums.reduce((a, n) => a + n, 0)}`);
+      
+      // find
+      logToConsole(console, `.find(n=>n>3) = ${nums.find(n => n > 3)}`);
+      
+      // includes
+      logToConsole(console, `.includes(3) = ${nums.includes(3)}`);
+      
+      // slice
+      logToConsole(console, `.slice(1, 4) = [${nums.slice(1, 4)}]`);
+      
+      // sort (descending)
+      const toSort = [3, 1, 4, 1, 5];
+      logToConsole(console, `[${toSort}].sort((a,b)=>b-a) = [${toSort.sort((a, b) => b - a)}]`);
+      
+      // spread
+      const combined = [...nums, ...[6, 7, 8]];
+      logToConsole(console, `Spread: [...[1-5], ...[6-8]] = [${combined}]`, 'success');
+    }
+    
+    // ===== OBJECTS DEMO =====
+    function demoObjects() {
+      const console = 'objConsole';
+      clearConsole(console);
+      
+      // Object creation
+      const person = { name: 'Alice', age: 25, city: 'London' };
+      logToConsole(console, `Object: ${JSON.stringify(person)}`);
+      
+      // Destructuring
+      const { name, age } = person;
+      logToConsole(console, `Destructured: name="${name}", age=${age}`);
+      
+      // Spread
+      const updated = { ...person, country: 'UK', age: 26 };
+      logToConsole(console, `Spread: ${JSON.stringify(updated)}`);
+      
+      // Object methods
+      logToConsole(console, `Object.keys() = [${Object.keys(person)}]`);
+      logToConsole(console, `Object.values() = [${Object.values(person)}]`);
+      logToConsole(console, `Object.entries() = ${JSON.stringify(Object.entries(person))}`);
+      
+      // Array destructuring
+      const [first, second] = [10, 20, 30];
+      logToConsole(console, `Array destruct: [first, second] = [${first}, ${second}]`);
+      
+      // Rest
+      const [head, ...tail] = [1, 2, 3, 4];
+      logToConsole(console, `Rest: [head, ...tail] = ${head}, [${tail}]`, 'success');
+    }
+    
+    // ===== CLASSES DEMO =====
+    function demoClasses() {
+      const console = 'classConsole';
+      clearConsole(console);
+      
+      class Animal {
+        constructor(name) { this.name = name; }
+        speak() { return `${this.name} makes a sound`; }
+      }
+      
+      class Dog extends Animal {
+        speak() { return `${this.name} barks!`; }
+      }
+      
+      const animal = new Animal('Creature');
+      const dog = new Dog('Rex');
+      
+      logToConsole(console, `new Animal('Creature').speak() = "${animal.speak()}"`);
+      logToConsole(console, `new Dog('Rex').speak() = "${dog.speak()}"`);
+      logToConsole(console, `dog instanceof Animal = ${dog instanceof Animal}`);
+      logToConsole(console, `dog instanceof Dog = ${dog instanceof Dog}`);
+      
+      // Static method
+      class MathUtil {
+        static square(n) { return n * n; }
+      }
+      logToConsole(console, `MathUtil.square(5) = ${MathUtil.square(5)}`, 'success');
+    }
+    
+    // ===== DOM MANIPULATION =====
+    let domOriginalColor = '#8599ae';
+    let domOriginalText = 'Target Element';
+    
+    function changeDomColor() {
+      const colors = ['#2c5041', '#8599ae', '#8b85a8', '#c4a480', '#b89da4', '#4a6a76'];
+      const target = document.getElementById('domTarget');
+      target.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    }
+    
+    function changeDomText() {
+      const texts = ['Hello World!', 'JS is Awesome!', 'DOM Manipulated!', 'Click Again!', 'Dynamic Content'];
+      document.getElementById('domTarget').textContent = texts[Math.floor(Math.random() * texts.length)];
+    }
+    
+    function toggleDomVisibility() {
+      const target = document.getElementById('domTarget');
+      target.style.opacity = target.style.opacity === '0' ? '1' : '0';
+    }
+    
+    function animateDom() {
+      const target = document.getElementById('domTarget');
+      target.style.transform = 'rotate(360deg) scale(1.1)';
+      setTimeout(() => { target.style.transform = 'rotate(0deg) scale(1)'; }, 500);
+    }
+    
+    function resetDom() {
+      const target = document.getElementById('domTarget');
+      target.style.backgroundColor = domOriginalColor;
+      target.textContent = domOriginalText;
+      target.style.opacity = '1';
+      target.style.transform = 'none';
+    }
+    
+    // ===== EVENT LISTENERS =====
+    const eventBox = document.getElementById('eventBox');
+    if (eventBox) {
+      eventBox.addEventListener('click', () => logEvent('click'));
+      eventBox.addEventListener('dblclick', () => logEvent('dblclick'));
+      eventBox.addEventListener('contextmenu', (e) => { e.preventDefault(); logEvent('right-click'); });
+      eventBox.addEventListener('mouseenter', () => logEvent('mouseenter'));
+      eventBox.addEventListener('mouseleave', () => logEvent('mouseleave'));
+    }
+    
+    function logEvent(type) {
+      const console = document.getElementById('eventConsole');
+      console.innerHTML = '';
+      const line = document.createElement('div');
+      line.className = 'log-success';
+      line.textContent = `> Event triggered: ${type}`;
+      console.appendChild(line);
+    }
+    
+    // ===== FORM VALIDATION =====
+    function validateDemoForm(event) {
+      event.preventDefault();
+      let valid = true;
+      
+      const name = document.getElementById('jsValName').value;
+      const email = document.getElementById('jsValEmail').value;
+      const pass = document.getElementById('jsValPass').value;
+      
+      document.getElementById('jsValNameError').style.display = 'none';
+      document.getElementById('jsValEmailError').style.display = 'none';
+      document.getElementById('jsValPassError').style.display = 'none';
+      document.getElementById('jsValSuccess').style.display = 'none';
+      
+      if (name.length < 3) {
+        document.getElementById('jsValNameError').style.display = 'block';
+        valid = false;
+      }
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById('jsValEmailError').style.display = 'block';
+        valid = false;
+      }
+      
+      if (pass.length < 8) {
+        document.getElementById('jsValPassError').style.display = 'block';
+        valid = false;
+      }
+      
+      if (valid) {
+        document.getElementById('jsValSuccess').style.display = 'block';
+      }
+      
+      return false;
+    }
+    
+    // ===== TIMER =====
+    let timerInterval = null;
+    let timerSeconds = 0;
+    
+    function startTimer() {
+      if (timerInterval) return;
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        updateTimerDisplay();
+      }, 1000);
+      document.getElementById('timerStart').disabled = true;
+    }
+    
+    function stopTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      document.getElementById('timerStart').disabled = false;
+    }
+    
+    function resetTimer() {
+      stopTimer();
+      timerSeconds = 0;
+      updateTimerDisplay();
+    }
+    
+    function updateTimerDisplay() {
+      const h = String(Math.floor(timerSeconds / 3600)).padStart(2, '0');
+      const m = String(Math.floor((timerSeconds % 3600) / 60)).padStart(2, '0');
+      const s = String(timerSeconds % 60).padStart(2, '0');
+      document.getElementById('timerDisplay').textContent = `${h}:${m}:${s}`;
+    }
+    
+    function demoTimeout() {
+      const console = 'timerConsole';
+      clearConsole(console);
+      logToConsole(console, 'setTimeout scheduled for 2 seconds...');
+      setTimeout(() => {
+        logToConsole(console, 'setTimeout executed! (2s delay)', 'success');
+      }, 2000);
+    }
+    
+    // ===== FETCH API =====
+    async function fetchUsers() {
+      const console = 'fetchConsole';
+      clearConsole(console);
+      logToConsole(console, 'Fetching users from JSONPlaceholder...');
+      
+      try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users?_limit=3');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const users = await response.json();
+        
+        users.forEach(user => {
+          logToConsole(console, `${user.name} (${user.email}) - ${user.company.name}`, 'success');
+        });
+      } catch (error) {
+        logToConsole(console, `Error: ${error.message}`, 'error');
+      }
+    }
+    
+    async function fetchPosts() {
+      const console = 'fetchConsole';
+      clearConsole(console);
+      logToConsole(console, 'Fetching posts from JSONPlaceholder...');
+      
+      try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=3');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const posts = await response.json();
+        
+        posts.forEach(post => {
+          logToConsole(console, `Post #${post.id}: ${post.title.substring(0, 40)}...`, 'success');
+        });
+      } catch (error) {
+        logToConsole(console, `Error: ${error.message}`, 'error');
+      }
+    }
+    
+    // ===== PROMISES DEMO =====
+    function demoPromises() {
+      const console = 'promiseConsole';
+      clearConsole(console);
+      
+      // Create promise
+      const myPromise = new Promise((resolve, reject) => {
+        logToConsole(console, 'Promise created, resolving in 1 second...');
+        setTimeout(() => resolve('Promise resolved!'), 1000);
+      });
+      
+      myPromise
+        .then(result => {
+          logToConsole(console, `.then(): ${result}`, 'success');
+          return 'Chained value';
+        })
+        .then(value => {
+          logToConsole(console, `.then() chained: ${value}`);
+          return Promise.resolve('From Promise.resolve()');
+        })
+        .then(val => {
+          logToConsole(console, val);
+          // Promise.all demo
+          return Promise.all([
+            Promise.resolve('A'),
+            Promise.resolve('B'),
+            Promise.resolve('C')
+          ]);
+        })
+        .then(results => {
+          logToConsole(console, `Promise.all([A,B,C]) = [${results.join(', ')}]`, 'success');
+        })
+        .catch(err => logToConsole(console, `Error: ${err}`, 'error'))
+        .finally(() => logToConsole(console, '.finally(): Cleanup complete'));
+    }
+    
+    // ===== CALCULATOR =====
+    let calcCurrent = '0';
+    let calcPrevious = '';
+    let calcOperation = null;
+    let calcResetNext = false;
+    
+    function calcNum(num) {
+      if (calcResetNext) {
+        calcCurrent = num === '.' ? '0.' : num;
+        calcResetNext = false;
+      } else {
+        if (num === '.' && calcCurrent.includes('.')) return;
+        calcCurrent = calcCurrent === '0' && num !== '.' ? num : calcCurrent + num;
+      }
+      document.getElementById('calcDisplay').textContent = calcCurrent;
+    }
+    
+    function calcOp(op) {
+      calcPrevious = calcCurrent;
+      calcOperation = op;
+      calcResetNext = true;
+    }
+    
+    function calcEquals() {
+      if (!calcOperation || !calcPrevious) return;
+      const prev = parseFloat(calcPrevious);
+      const curr = parseFloat(calcCurrent);
+      let result;
+      
+      switch(calcOperation) {
+        case '+': result = prev + curr; break;
+        case '-': result = prev - curr; break;
+        case '*': result = prev * curr; break;
+        case '/': result = curr !== 0 ? prev / curr : 'Error'; break;
+        case '%': result = prev % curr; break;
+      }
+      
+      calcCurrent = String(result);
+      calcOperation = null;
+      calcPrevious = '';
+      calcResetNext = true;
+      document.getElementById('calcDisplay').textContent = calcCurrent;
+    }
+    
+    function calcClear() {
+      calcCurrent = '0';
+      calcPrevious = '';
+      calcOperation = null;
+      calcResetNext = false;
+      document.getElementById('calcDisplay').textContent = '0';
+    }
+    
+    // ===== TO-DO LIST =====
+    function addTodo() {
+      const input = document.getElementById('todoInput');
+      const text = input.value.trim();
+      if (!text) return;
+      
+      const list = document.getElementById('todoList');
+      const li = document.createElement('li');
+      li.className = 'todo-item';
+      li.innerHTML = `
+        <input type="checkbox" class="todo-checkbox" onchange="toggleTodo(this)">
+        <span class="todo-text">${text}</span>
+        <button class="todo-delete" onclick="deleteTodo(this)">&times;</button>
+      `;
+      list.appendChild(li);
+      input.value = '';
+      updateTodoCount();
+    }
+    
+    function toggleTodo(checkbox) {
+      checkbox.closest('.todo-item').classList.toggle('completed');
+      updateTodoCount();
+    }
+    
+    function deleteTodo(button) {
+      button.closest('.todo-item').remove();
+      updateTodoCount();
+    }
+    
+    function clearCompleted() {
+      document.querySelectorAll('.todo-item.completed').forEach(item => item.remove());
+      updateTodoCount();
+    }
+    
+    function updateTodoCount() {
+      const active = document.querySelectorAll('.todo-item:not(.completed)').length;
+      document.getElementById('todoCount').textContent = `${active} item${active !== 1 ? 's' : ''} left`;
+    }
+    
+    // ===== SEARCH FILTER =====
+    function filterItems() {
+      const term = document.getElementById('searchInput').value.toLowerCase();
+      document.querySelectorAll('#filterList li').forEach(item => {
+        item.classList.toggle('hidden', !item.textContent.toLowerCase().includes(term));
+      });
+    }
+    
+    // ===== THEME TOGGLE DEMO =====
+    function toggleDemoTheme() {
+      const switchEl = document.getElementById('demoThemeSwitch');
+      const box = document.getElementById('themeDemoBox');
+      switchEl.classList.toggle('active');
+      
+      if (switchEl.classList.contains('active')) {
+        box.style.backgroundColor = '#2a2a2a';
+        box.style.color = '#e8e5d6';
+      } else {
+        box.style.backgroundColor = '#e8e5d6';
+        box.style.color = '#231f20';
+      }
+    }
+    
+    // ===== ANIMATED COUNTER =====
+    function animateCounter(el, target, duration) {
+      const start = performance.now();
+      
+      function update(time) {
+        const elapsed = time - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(target * eased).toLocaleString();
+        
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target.toLocaleString();
+      }
+      
+      requestAnimationFrame(update);
+    }
+    
+    // ===== JSON DEMO =====
+    function demoJSON() {
+      const console = 'jsonConsole';
+      clearConsole(console);
+      
+      const user = { name: 'Alice', age: 25, skills: ['HTML', 'CSS', 'JS'] };
+      logToConsole(console, `Object: ${JSON.stringify(user)}`);
+      
+      const jsonString = JSON.stringify(user);
+      logToConsole(console, `JSON.stringify() = "${jsonString}"`);
+      
+      const parsed = JSON.parse(jsonString);
+      logToConsole(console, `JSON.parse() = ${JSON.stringify(parsed)}`);
+      
+      const pretty = JSON.stringify(user, null, 2);
+      logToConsole(console, `Pretty print:\n${pretty}`, 'success');
+      
+      // localStorage
+      localStorage.setItem('demoUser', jsonString);
+      const loaded = JSON.parse(localStorage.getItem('demoUser'));
+      logToConsole(console, `From localStorage: ${JSON.stringify(loaded)}`);
+    }
+    
+    // ===== FAQ ACCORDION =====
+    // Handled globally in js/main.js
+  </script>
+</body>
+</html>

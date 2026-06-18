@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get in touch with the developer. Contact form, social media links, location map, and frequently asked questions.">
+  <title>Contact | My ePortfolio</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* Contact page specific styles */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      align-items: start;
+    }
+    
+    .contact-info h2 {
+      font-size: 42px;
+      margin-bottom: 20px;
+    }
+    
+    .contact-info > p {
+      color: var(--text-secondary);
+      font-size: 17px;
+      margin-bottom: 32px;
+    }
+    
+    .contact-details {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 32px;
+    }
+    
+    .contact-details li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      font-size: 15px;
+    }
+    
+    .contact-details i {
+      width: 44px;
+      height: 44px;
+      background-color: rgba(44, 80, 65, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--forest-green);
+      font-size: 18px;
+    }
+    
+    .contact-form-card {
+      background-color: var(--bg-secondary);
+      border-radius: var(--border-radius);
+      padding: 40px;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .contact-form .form-control {
+      border: none;
+      border-bottom: 1px solid var(--black);
+      border-radius: 0;
+      background-color: transparent;
+      padding: 12px 0;
+      font-size: 16px;
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+    
+    .contact-form .form-control:focus {
+      box-shadow: none;
+      border-color: var(--forest-green);
+      box-shadow: 0 2px 0 var(--forest-green);
+      background-color: transparent;
+    }
+    
+    .contact-form .form-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    
+    .contact-form textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+    
+    .social-links-large {
+      display: flex;
+      gap: 12px;
+    }
+    
+    .social-links-large a {
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      font-size: 20px;
+      transition: all var(--transition-base);
+    }
+    
+    .social-links-large a:hover {
+      background-color: var(--forest-green);
+      border-color: var(--forest-green);
+      color: var(--white);
+    }
+    
+    .map-section {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .map-container {
+      width: 100%;
+      height: 400px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: saturate(0.3);
+    }
+    
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 40px;
+    }
+    
+    .success-message.show {
+      display: block;
+    }
+    
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background-color: rgba(44, 80, 65, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      color: var(--forest-green);
+      font-size: 36px;
+    }
+    
+    /* FAQ Section */
+    .faq-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    @media (max-width: 991px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Page Loader -->
+  <div class="page-loader" role="status" aria-label="Loading page">
+    <div class="loader-shape"></div>
+  </div>
+
+  <!-- Fixed Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="site-logo">My ePortfolio</a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="fullstack.html" class="nav-link">Full Stack</a>
+        <a href="html-demo.html" class="nav-link">HTML</a>
+        <a href="css-demo.html" class="nav-link">CSS</a>
+        <a href="bootstrap-demo.html" class="nav-link">Bootstrap</a>
+        <a href="js-demo.html" class="nav-link">JavaScript</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="fullstack.html" class="nav-link">Full Stack</a>
+      <a href="html-demo.html" class="nav-link">HTML</a>
+      <a href="css-demo.html" class="nav-link">CSS</a>
+      <a href="bootstrap-demo.html" class="nav-link">Bootstrap</a>
+      <a href="js-demo.html" class="nav-link">JavaScript</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    
+    <!-- Page Hero -->
+    <section class="hero page-hero">
+      <div class="hero-content reveal">
+        <h1>Get in Touch</h1>
+        <p>I'd love to hear from you. Whether you have a question, want to collaborate, or are interested in hiring, feel free to reach out.</p>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section">
+      <div class="contact-layout">
+        <div class="contact-info reveal">
+          <h2>Let's start a conversation.</h2>
+          <p>I'm currently available for Junior Full Stack Developer positions and freelance projects. I respond to all messages within 24 hours.</p>
+          
+          <ul class="contact-details">
+            <li>
+              <i class="bi bi-envelope"></i>
+              <div>
+                <strong style="display: block; margin-bottom: 2px;">Email</strong>
+                <a href="mailto:developer@myeportfolio.com">developer@myeportfolio.com</a>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-telephone"></i>
+              <div>
+                <strong style="display: block; margin-bottom: 2px;">Phone</strong>
+                <a href="tel:+447700900123">+44 (0) 7700 900123</a>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-geo-alt"></i>
+              <div>
+                <strong style="display: block; margin-bottom: 2px;">Location</strong>
+                <span>London, United Kingdom</span>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-clock"></i>
+              <div>
+                <strong style="display: block; margin-bottom: 2px;">Availability</strong>
+                <span>Monday - Friday, 9:00 - 18:00 GMT</span>
+              </div>
+            </li>
+          </ul>
+          
+          <h5 style="font-size: 16px; margin-bottom: 16px;">Follow Me</h5>
+          <div class="social-links-large">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+              <i class="bi bi-github"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+              <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter Profile">
+              <i class="bi bi-twitter-x"></i>
+            </a>
+            <a href="https://codepen.io" target="_blank" rel="noopener noreferrer" aria-label="CodePen Profile">
+              <i class="bi bi-code-square"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="contact-form-card reveal reveal-delay-2">
+          <div id="contactFormWrapper">
+            <h4 style="margin-bottom: 24px;">Send a Message</h4>
+            <form class="contact-form" id="contactForm" novalidate>
+              <div class="mb-4">
+                <label for="contactName" class="form-label">Your Name *</label>
+                <input type="text" class="form-control" id="contactName" name="name" required aria-required="true" placeholder="John Smith">
+                <div class="invalid-feedback" style="font-size: 13px;">Please enter your name (at least 2 characters).</div>
+              </div>
+              <div class="mb-4">
+                <label for="contactEmail" class="form-label">Email Address *</label>
+                <input type="email" class="form-control" id="contactEmail" name="email" required aria-required="true" placeholder="john@example.com">
+                <div class="invalid-feedback" style="font-size: 13px;">Please enter a valid email address.</div>
+              </div>
+              <div class="mb-4">
+                <label for="contactSubject" class="form-label">Subject *</label>
+                <select class="form-control" id="contactSubject" name="subject" required aria-required="true" style="border-radius: 0;">
+                  <option value="" selected disabled>Select a subject...</option>
+                  <option value="job">Job Opportunity</option>
+                  <option value="project">Project Collaboration</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="other">Other</option>
+                </select>
+                <div class="invalid-feedback" style="font-size: 13px;">Please select a subject.</div>
+              </div>
+              <div class="mb-4">
+                <label for="contactMessage" class="form-label">Message *</label>
+                <textarea class="form-control" id="contactMessage" name="message" rows="4" required aria-required="true" placeholder="Tell me about your project or opportunity..."></textarea>
+                <div class="invalid-feedback" style="font-size: 13px;">Please enter a message (at least 10 characters).</div>
+              </div>
+              <button type="submit" class="btn btn-primary w-100" style="padding: 14px;">Send Message</button>
+            </form>
+          </div>
+          
+          <div class="success-message" id="successMessage">
+            <div class="success-icon">
+              <i class="bi bi-check-lg"></i>
+            </div>
+            <h3 style="margin-bottom: 12px;">Message Sent!</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">Thank you for reaching out. I'll get back to you within 24 hours.</p>
+            <button class="btn btn-outline" onclick="resetContactForm()">Send Another Message</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="section bg-white-section">
+      <div class="map-section reveal">
+        <h2 class="text-center mb-4">Where to Find Me</h2>
+        <p class="text-center" style="color: var(--text-secondary); margin-bottom: 32px;">Based in London, United Kingdom. Open to remote opportunities worldwide.</p>
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158858.182370726!2d-0.10159865000000001!3d51.52864165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C%20UK!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Map showing London, United Kingdom">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>Frequently Asked Questions</h2>
+        <p>Common questions about my skills, availability, and working preferences.</p>
+      </div>
+      <div class="faq-section">
+        <div class="accordion" id="contactFaq">
+          <div class="accordion-item reveal">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                Are you currently available for hire?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#contactFaq">
+              <div class="accordion-body">
+                Yes! I am actively seeking Junior Full Stack Developer positions. I am available for full-time, part-time, and contract roles. I'm particularly interested in opportunities where I can continue learning while contributing meaningfully to the team.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item reveal reveal-delay-1">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                What technologies do you specialise in?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#contactFaq">
+              <div class="accordion-body">
+                My core front-end skills include HTML5, CSS3, Bootstrap 5, and JavaScript (ES6+). I am comfortable with DOM manipulation, event handling, Fetch API, async/await, and local storage. I am currently expanding my knowledge of React and Node.js to strengthen my full stack capabilities.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item reveal reveal-delay-2">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                Do you work remotely or on-site?
+              </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#contactFaq">
+              <div class="accordion-body">
+                I am flexible with both remote and on-site work. I am based in London and happy to work in-office within the Greater London area. I am also fully equipped for remote work with reliable internet, a dedicated workspace, and experience collaborating through digital tools.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item reveal reveal-delay-3">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                Can you show me your code or GitHub profile?
+              </button>
+            </h2>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#contactFaq">
+              <div class="accordion-body">
+                Absolutely! All of my projects are available on my GitHub profile. This entire ePortfolio website is also open-source and demonstrates clean, well-commented code. Feel free to explore the repositories linked on my Projects page.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item reveal reveal-delay-4">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                How do you approach learning new technologies?
+              </button>
+            </h2>
+            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#contactFaq">
+              <div class="accordion-body">
+                I believe in learning by doing. I start with official documentation and tutorials, then build small projects to apply what I've learned. I also follow industry blogs, participate in coding communities, and regularly practise on platforms like freeCodeCamp and Codecademy. Building this ePortfolio was itself a major learning exercise.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item reveal reveal-delay-5">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">
+                What is your expected salary range?
+              </button>
+            </h2>
+            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#contactFaq">
+              <div class="accordion-body">
+                As a junior developer, my expectations are aligned with industry standards for entry-level positions in the UK market. I am open to discussing salary based on the role, responsibilities, and opportunities for growth. I value learning and mentorship alongside compensation.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>My ePortfolio</h3>
+        <p>A comprehensive demonstration of Full Stack Web Development skills, built as a learning portfolio to showcase HTML, CSS, Bootstrap, and JavaScript proficiency.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="fullstack.html">What is Full Stack</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Technologies</h4>
+        <ul class="footer-links">
+          <li><a href="html-demo.html">HTML5</a></li>
+          <li><a href="css-demo.html">CSS3</a></li>
+          <li><a href="bootstrap-demo.html">Bootstrap 5</a></li>
+          <li><a href="js-demo.html">JavaScript</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Thank You</h4>
+        <p style="color: rgba(244,244,244,0.7); font-size: 14px;">Thank you for visiting my ePortfolio. This website was built entirely with HTML5, CSS3, Bootstrap 5, and vanilla JavaScript to demonstrate my understanding of core web technologies.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p> 2024 My ePortfolio. Built with passion for web development education.</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+  
+  <script>
+    // Contact form validation
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      let isValid = true;
+      const name = document.getElementById('contactName');
+      const email = document.getElementById('contactEmail');
+      const subject = document.getElementById('contactSubject');
+      const message = document.getElementById('contactMessage');
+      
+      // Reset validation states
+      [name, email, subject, message].forEach(field => {
+        field.classList.remove('is-invalid', 'is-valid');
+      });
+      
+      // Validate name
+      if (!name.value.trim() || name.value.trim().length < 2) {
+        name.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        name.classList.add('is-valid');
+      }
+      
+      // Validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value.trim() || !emailRegex.test(email.value)) {
+        email.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        email.classList.add('is-valid');
+      }
+      
+      // Validate subject
+      if (!subject.value) {
+        subject.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        subject.classList.add('is-valid');
+      }
+      
+      // Validate message
+      if (!message.value.trim() || message.value.trim().length < 10) {
+        message.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        message.classList.add('is-valid');
+      }
+      
+      if (isValid) {
+        // Show success message
+        document.getElementById('contactFormWrapper').style.display = 'none';
+        document.getElementById('successMessage').classList.add('show');
+        showToast('Message sent successfully!');
+      }
+    });
+    
+    function resetContactForm() {
+      document.getElementById('contactForm').reset();
+      document.querySelectorAll('.form-control').forEach(field => {
+        field.classList.remove('is-valid', 'is-invalid');
+      });
+      document.getElementById('contactFormWrapper').style.display = 'block';
+      document.getElementById('successMessage').classList.remove('show');
+    }
+  </script>
+</body>
+</html>

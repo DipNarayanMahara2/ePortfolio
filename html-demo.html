@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Comprehensive HTML5 demonstrations covering semantic elements, forms, tables, multimedia, and all major HTML topics with live examples.">
+  <title>HTML Demonstrations | My ePortfolio</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* HTML Demo page specific styles */
+    .element-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 24px;
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .html-demo-card {
+      background-color: var(--bg-secondary);
+      border-radius: var(--border-radius);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(196, 164, 128, 0.3);
+    }
+    
+    .html-demo-card h4 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .html-demo-card .preview-area {
+      background-color: rgba(133, 153, 174, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    
+    .html-demo-card code-example {
+      display: block;
+      background-color: var(--slate);
+      color: var(--white);
+      font-family: var(--font-code);
+      font-size: 12px;
+      padding: 16px;
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+    
+    .html-demo-card code-example code {
+      font-family: inherit;
+    }
+    
+    /* Form demo styles */
+    .form-demo .form-label {
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
+    .form-demo .form-control,
+    .form-demo .form-select {
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      font-size: 14px;
+    }
+    
+    .form-demo .form-control:focus,
+    .form-demo .form-select:focus {
+      border-color: var(--forest-green);
+      box-shadow: 0 0 0 3px rgba(44, 80, 65, 0.1);
+    }
+    
+    /* Table demo */
+    .table-demo {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    
+    .table-demo th,
+    .table-demo td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .table-demo th {
+      background-color: rgba(44, 80, 65, 0.08);
+      font-weight: 600;
+      color: var(--forest-green);
+    }
+    
+    .table-demo tbody tr:hover {
+      background-color: rgba(133, 153, 174, 0.05);
+    }
+    
+    /* Semantic structure demo */
+    .semantic-demo {
+      border: 2px dashed var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    
+    .semantic-demo header,
+    .semantic-demo nav,
+    .semantic-demo main,
+    .semantic-demo section,
+    .semantic-demo article,
+    .semantic-demo aside,
+    .semantic-demo footer {
+      padding: 12px;
+      margin: 4px 0;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    
+    .semantic-demo header { background-color: rgba(133, 153, 174, 0.2); }
+    .semantic-demo nav { background-color: rgba(44, 80, 65, 0.15); }
+    .semantic-demo main { background-color: rgba(196, 164, 128, 0.15); }
+    .semantic-demo section { background-color: rgba(139, 133, 168, 0.15); }
+    .semantic-demo article { background-color: rgba(184, 157, 164, 0.2); }
+    .semantic-demo aside { background-color: rgba(157, 166, 163, 0.2); }
+    .semantic-demo footer { background-color: rgba(74, 106, 118, 0.15); }
+    
+    .semantic-demo .tag-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      opacity: 0.7;
+    }
+    
+    /* Multimedia placeholder */
+    .media-placeholder {
+      background-color: var(--slate);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      color: var(--white);
+      text-align: center;
+      min-height: 150px;
+    }
+    
+    .media-placeholder i {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+    
+    /* List styles */
+    .list-demo ol,
+    .list-demo ul,
+    .list-demo dl {
+      margin-bottom: 16px;
+    }
+    
+    .list-demo dt {
+      font-weight: 600;
+      color: var(--forest-green);
+    }
+    
+    .list-demo dd {
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+    
+    /* Details/Summary */
+    .details-demo details {
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 8px;
+    }
+    
+    .details-demo summary {
+      font-weight: 500;
+      cursor: pointer;
+    }
+    
+    /* Dialog demo */
+    .dialog-demo dialog {
+      border: none;
+      border-radius: var(--border-radius);
+      padding: 32px;
+      box-shadow: var(--shadow-xl);
+      max-width: 400px;
+      width: 90%;
+    }
+    
+    .dialog-demo dialog::backdrop {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    @media (max-width: 767px) {
+      .element-grid {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Page Loader -->
+  <div class="page-loader" role="status" aria-label="Loading page">
+    <div class="loader-shape"></div>
+  </div>
+
+  <!-- Fixed Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="site-logo">My ePortfolio</a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="fullstack.html" class="nav-link">Full Stack</a>
+        <a href="html-demo.html" class="nav-link active">HTML</a>
+        <a href="css-demo.html" class="nav-link">CSS</a>
+        <a href="bootstrap-demo.html" class="nav-link">Bootstrap</a>
+        <a href="js-demo.html" class="nav-link">JavaScript</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="fullstack.html" class="nav-link">Full Stack</a>
+      <a href="html-demo.html" class="nav-link active">HTML</a>
+      <a href="css-demo.html" class="nav-link">CSS</a>
+      <a href="bootstrap-demo.html" class="nav-link">Bootstrap</a>
+      <a href="js-demo.html" class="nav-link">JavaScript</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    
+    <!-- Page Hero -->
+    <section class="hero page-hero">
+      <div class="hero-content reveal">
+        <h1>HTML Demonstrations</h1>
+        <p>The Structure of the Web. HTML (HyperText Markup Language) provides the semantic foundation for every web page. Explore every major element and attribute through live, interactive examples.</p>
+      </div>
+    </section>
+
+    <!-- Document Structure -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>Document Structure</h2>
+        <p>The fundamental building blocks of every HTML document.</p>
+      </div>
+      <div class="element-grid">
+        <!-- DOCTYPE & Basic Structure -->
+        <div class="html-demo-card reveal">
+          <h4>
+            <span>Document Structure</span>
+            <span class="demo-badge badge-html">Core</span>
+          </h4>
+          <div class="preview-area">
+            <p style="font-size: 13px; margin: 0;">Every HTML5 document starts with <code>&lt;!DOCTYPE html&gt;</code> and contains <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code> elements.</p>
+          </div>
+          <code-example>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+    &lt;meta name="description" 
+          content="A description"&gt;
+    &lt;link rel="stylesheet" 
+          href="styles.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- Visible content --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+          </code-example>
+        </div>
+
+        <!-- Metadata -->
+        <div class="html-demo-card reveal reveal-delay-1">
+          <h4>
+            <span>Metadata Elements</span>
+            <span class="demo-badge badge-html">Head</span>
+          </h4>
+          <div class="preview-area">
+            <p style="font-size: 13px; margin: 0;">Metadata lives in the <code>&lt;head&gt;</code> and provides information about the document. View the source code of this page to see metadata in action, including charset, viewport, description, keywords, and author meta tags.</p>
+          </div>
+          <code-example>
+&lt;meta charset="UTF-8"&gt;
+&lt;meta name="viewport" 
+      content="width=device-width"&gt;
+&lt;meta name="description" 
+      content="Page description"&gt;
+&lt;meta name="keywords" 
+      content="HTML, CSS, JS"&gt;
+&lt;meta name="author" 
+      content="Developer"&gt;
+&lt;title&gt;Page Title&lt;/title&gt;
+&lt;link rel="stylesheet" 
+      href="style.css"&gt;
+&lt;style&gt;/* Internal CSS */&lt;/style&gt;
+&lt;script src="app.js"&gt;&lt;/script&gt;
+          </code-example>
+        </div>
+
+        <!-- Headings -->
+        <div class="html-demo-card reveal reveal-delay-2">
+          <h4>
+            <span>Headings &amp; Text</span>
+            <span class="demo-badge badge-html">Text</span>
+          </h4>
+          <div class="preview-area">
+            <h1 style="font-size: 24px; margin-bottom: 8px;">Heading 1 (h1)</h1>
+            <h2 style="font-size: 20px; margin-bottom: 8px;">Heading 2 (h2)</h2>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">Heading 3 (h3)</h3>
+            <p style="margin-bottom: 8px;">A paragraph with <strong>bold</strong> and <em>italic</em> text.</p>
+            <hr style="margin: 12px 0;">
+            <p style="margin: 0; font-size: 13px;">Line break above, horizontal rule used for separation.</p>
+          </div>
+          <code-example>
+&lt;h1&gt;Main Heading&lt;/h1&gt;
+&lt;h2&gt;Sub-heading&lt;/h2&gt;
+&lt;h3&gt;Section Heading&lt;/h3&gt;
+&lt;p&gt;A paragraph with 
+   &lt;strong&gt;bold&lt;/strong&gt; and 
+   &lt;em&gt;italic&lt;/em&gt; text.
+&lt;/p&gt;
+&lt;br&gt; &lt;!-- Line break --&gt;
+&lt;hr&gt; &lt;!-- Horizontal rule --&gt;
+          </code-example>
+        </div>
+
+        <!-- Text Formatting -->
+        <div class="html-demo-card reveal reveal-delay-3">
+          <h4>
+            <span>Text Formatting</span>
+            <span class="demo-badge badge-html">Inline</span>
+          </h4>
+          <div class="preview-area">
+            <p style="font-size: 14px; margin-bottom: 8px;"><strong>&lt;strong&gt;</strong> - Important text</p>
+            <p style="font-size: 14px; margin-bottom: 8px;"><em>&lt;em&gt;</em> - Emphasised text</p>
+            <p style="font-size: 14px; margin-bottom: 8px;"><mark>&lt;mark&gt;</mark> - Highlighted text</p>
+            <p style="font-size: 14px; margin-bottom: 8px;"><small>&lt;small&gt;</small> - Smaller text</p>
+            <p style="font-size: 14px; margin-bottom: 8px;">H<sub>2</sub>O (&lt;sub&gt;) and E=mc<sup>2</sup> (&lt;sup&gt;)</p>
+            <blockquote style="border-left: 3px solid var(--forest-green); padding-left: 12px; margin: 8px 0; font-style: italic; color: var(--text-secondary);">
+              "A blockquote for quoted content"
+            </blockquote>
+            <p style="font-size: 14px; margin-bottom: 8px;"><q>&lt;q&gt; - Inline quote</q></p>
+            <p style="font-size: 14px; margin-bottom: 8px;"><code>&lt;code&gt;</code> - Inline code</p>
+            <pre style="background-color: rgba(0,0,0,0.05); padding: 8px; border-radius: 6px; font-size: 12px; margin: 0;">&lt;pre&gt; - Preformatted
+    text preserves
+    whitespace</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Semantic Elements -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>Semantic HTML5 Elements</h2>
+        <p>Semantic elements give meaning to the structure, improving accessibility and SEO.</p>
+      </div>
+      <div class="max-width reveal reveal-delay-1">
+        <div class="html-demo-card">
+          <h4>
+            <span>Semantic Page Structure</span>
+            <span class="demo-badge badge-html">HTML5</span>
+          </h4>
+          <div class="semantic-demo">
+            <header>
+              <span class="tag-label">&lt;header&gt;</span>
+              <nav style="margin-top: 4px;">
+                <span class="tag-label">&lt;nav&gt;</span> - Navigation links
+              </nav>
+            </header>
+            <main>
+              <span class="tag-label">&lt;main&gt;</span>
+              <section style="margin-top: 4px;">
+                <span class="tag-label">&lt;section&gt;</span>
+                <article style="margin-top: 4px;">
+                  <span class="tag-label">&lt;article&gt;</span> - Independent content
+                  <figure style="margin-top: 4px; text-align: center;">
+                    <span class="tag-label">&lt;figure&gt;</span>
+                    <div style="padding: 16px; background: white; border-radius: 8px; margin: 4px 0;">[Image]</div>
+                    <figcaption style="font-size: 11px;">&lt;figcaption&gt; - Image caption</figcaption>
+                  </figure>
+                </article>
+              </section>
+              <aside style="margin-top: 4px;">
+                <span class="tag-label">&lt;aside&gt;</span> - Sidebar content
+              </aside>
+            </main>
+            <footer style="margin-top: 4px;">
+              <span class="tag-label">&lt;footer&gt;</span> - Footer content
+            </footer>
+          </div>
+          <code-example style="margin-top: 16px;">
+&lt;header&gt;...&lt;/header&gt;
+&lt;nav&gt;...&lt;/nav&gt;
+&lt;main&gt;
+  &lt;section&gt;...&lt;/section&gt;
+  &lt;article&gt;...&lt;/article&gt;
+  &lt;aside&gt;...&lt;/aside&gt;
+&lt;/main&gt;
+&lt;footer&gt;...&lt;/footer&gt;
+&lt;figure&gt;
+  &lt;img src="..." alt="..."&gt;
+  &lt;figcaption&gt;...&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;address&gt;Contact info&lt;/address&gt;
+          </code-example>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lists -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>Lists</h2>
+        <p>Three types of lists for organising content.</p>
+      </div>
+      <div class="element-grid">
+        <div class="html-demo-card reveal">
+          <h4>
+            <span>Ordered List &lt;ol&gt;</span>
+            <span class="demo-badge badge-html">List</span>
+          </h4>
+          <div class="preview-area list-demo">
+            <ol>
+              <li>First item (numbered)</li>
+              <li>Second item</li>
+              <li>Third item with nested list:
+                <ol type="a">
+                  <li>Sub-item A</li>
+                  <li>Sub-item B</li>
+                </ol>
+              </li>
+              <li value="10">Item with custom start</li>
+            </ol>
+          </div>
+          <code-example>
+&lt;ol&gt;
+  &lt;li&gt;First item&lt;/li&gt;
+  &lt;li&gt;Second item&lt;/li&gt;
+  &lt;li&gt;Third item
+    &lt;ol type="a"&gt;
+      &lt;li&gt;Sub-item A&lt;/li&gt;
+      &lt;li&gt;Sub-item B&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+          </code-example>
+        </div>
+
+        <div class="html-demo-card reveal reveal-delay-1">
+          <h4>
+            <span>Unordered List &lt;ul&gt;</span>
+            <span class="demo-badge badge-html">List</span>
+          </h4>
+          <div class="preview-area list-demo">
+            <ul>
+              <li>HTML5 semantic elements</li>
+              <li>CSS3 Flexbox and Grid</li>
+              <li>JavaScript ES6+ features:
+                <ul>
+                  <li>Arrow functions</li>
+                  <li>Destructuring</li>
+                  <li>Async/Await</li>
+                </ul>
+              </li>
+              <li>Bootstrap 5 components</li>
+            </ul>
+          </div>
+          <code-example>
+&lt;ul&gt;
+  &lt;li&gt;HTML5 semantic elements&lt;/li&gt;
+  &lt;li&gt;CSS3 Flexbox and Grid&lt;/li&gt;
+  &lt;li&gt;JavaScript ES6+
+    &lt;ul&gt;
+      &lt;li&gt;Arrow functions&lt;/li&gt;
+      &lt;li&gt;Async/Await&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+          </code-example>
+        </div>
+
+        <div class="html-demo-card reveal reveal-delay-2">
+          <h4>
+            <span>Description List &lt;dl&gt;</span>
+            <span class="demo-badge badge-html">List</span>
+          </h4>
+          <div class="preview-area list-demo">
+            <dl>
+              <dt>HTML</dt>
+              <dd>HyperText Markup Language - structures web content</dd>
+              <dt>CSS</dt>
+              <dd>Cascading Style Sheets - styles web content</dd>
+              <dt>JS</dt>
+              <dd>JavaScript - adds interactivity to web pages</dd>
+              <dt>DOM</dt>
+              <dd>Document Object Model - represents the page structure</dd>
+            </dl>
+          </div>
+          <code-example>
+&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;HyperText Markup Language&lt;/dd&gt;
+  &lt;dt&gt;CSS&lt;/dt&gt;
+  &lt;dd&gt;Cascading Style Sheets&lt;/dd&gt;
+  &lt;dt&gt;JS&lt;/dt&gt;
+  &lt;dd&gt;JavaScript&lt;/dd&gt;
+&lt;/dl&gt;
+          </code-example>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tables -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>Tables</h2>
+        <p>Structured data presentation with full table anatomy.</p>
+      </div>
+      <div class="max-width reveal reveal-delay-1">
+        <div class="html-demo-card">
+          <h4>
+            <span>Complete Table Structure</span>
+            <span class="demo-badge badge-html">Data</span>
+          </h4>
+          <div class="preview-area" style="overflow-x: auto;">
+            <table class="table-demo">
+              <caption style="caption-side: top; text-align: left; font-weight: 600; margin-bottom: 12px; color: var(--forest-green);">Web Development Technologies Overview</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Technology</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Purpose</th>
+                  <th scope="col">Version</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>HTML</td>
+                  <td>Markup</td>
+                  <td>Structure</td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td>CSS</td>
+                  <td>Stylesheet</td>
+                  <td>Presentation</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>JavaScript</td>
+                  <td>Programming</td>
+                  <td>Behaviour</td>
+                  <td>ES2023</td>
+                </tr>
+                <tr>
+                  <td>Bootstrap</td>
+                  <td>Framework</td>
+                  <td>UI Components</td>
+                  <td>5.3</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4" style="font-style: italic; color: var(--text-secondary);">All technologies are actively maintained and widely adopted</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <code-example>
+&lt;table&gt;
+  &lt;caption&gt;Table Title&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Header&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Data&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;&lt;td&gt;Footer&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;
+          </code-example>
+        </div>
+      </div>
+    </section>
+
+    <!-- Links & Media -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>Links &amp; Multimedia</h2>
+        <p>Connecting pages and embedding rich media content.</p>
+      </div>
+      <div class="element-grid">
+        <div class="html-demo-card reveal">
+          <h4>
+            <span>Links &lt;a&gt;</span>
+            <span class="demo-badge badge-html">Navigation</span>
+          </h4>
+          <div class="preview-area">
+            <p style="margin-bottom: 12px;"><a href="index.html">Internal link</a> - navigates within the site</p>
+            <p style="margin-bottom: 12px;"><a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">External link (new tab)</a></p>
+            <p style="margin-bottom: 12px;"><a href="mailto:hello@example.com">Email link</a></p>
+            <p style="margin-bottom: 12px;"><a href="tel:+44123456789">Telephone link</a></p>
+            <p style="margin: 0;"><a href="images/profile.jpg" download>Download link</a> - triggers file download</p>
+          </div>
+          <code-example>
+&lt;a href="page.html"&gt;Internal&lt;/a&gt;
+&lt;a href="..." target="_blank"&gt;External&lt;/a&gt;
+&lt;a href="mailto:...@..."&gt;Email&lt;/a&gt;
+&lt;a href="tel:..."&gt;Phone&lt;/a&gt;
+&lt;a href="file.pdf" download&gt;Download&lt;/a&gt;
+          </code-example>
+        </div>
+
+        <div class="html-demo-card reveal reveal-delay-1">
+          <h4>
+            <span>Images &lt;img&gt;</span>
+            <span class="demo-badge badge-html">Media</span>
+          </h4>
+          <div class="preview-area">
+            <img src="images/profile.jpg" alt="Professional portrait demonstration" style="width: 100px; height: 100px; object-fit: cover; border-radius: 12px; margin-bottom: 12px;">
+            <p style="font-size: 13px; margin: 0; color: var(--text-secondary);">Responsive image with srcset, sizes, and lazy loading attributes.</p>
+          </div>
+          <code-example>
+&lt;img src="photo.jpg"
+     alt="Descriptive text"
+     width="400" height="300"
+     loading="lazy"&gt;
+
+&lt;!-- Responsive --&gt;
+&lt;img srcset="small.jpg 300w,
+             medium.jpg 600w,
+             large.jpg 900w"
+     sizes="(max-width: 600px) 300px,
+            (max-width: 900px) 600px,
+            900px"
+     src="large.jpg"
+     alt="Responsive image"&gt;
+          </code-example>
+        </div>
+
+        <div class="html-demo-card reveal reveal-delay-2">
+          <h4>
+            <span>Audio &amp; Video</span>
+            <span class="demo-badge badge-html">Media</span>
+          </h4>
+          <div class="preview-area">
+            <div class="media-placeholder">
+              <i class="bi bi-film"></i>
+              <p style="margin: 8px 0 0; font-size: 13px;">&lt;video&gt; and &lt;audio&gt; elements with controls, autoplay, loop, and preload attributes.</p>
+            </div>
+          </div>
+          <code-example>
+&lt;video controls width="400" 
+       poster="thumbnail.jpg"&gt;
+  &lt;source src="video.mp4" 
+          type="video/mp4"&gt;
+  &lt;track src="captions.vtt" 
+         kind="subtitles"&gt;
+  Your browser does not support video.
+&lt;/video&gt;
+
+&lt;audio controls&gt;
+  &lt;source src="audio.mp3" 
+          type="audio/mpeg"&gt;
+&lt;/audio&gt;
+          </code-example>
+        </div>
+
+        <div class="html-demo-card reveal reveal-delay-3">
+          <h4>
+            <span>Embedded Content</span>
+            <span class="demo-badge badge-html">Embed</span>
+          </h4>
+          <div class="preview-area">
+            <div class="media-placeholder">
+              <i class="bi bi-box-arrow-in-up-right"></i>
+              <p style="margin: 8px 0 0; font-size: 13px;">&lt;iframe&gt;, &lt;embed&gt;, and &lt;object&gt; for embedding external content like maps, PDFs, and YouTube videos.</p>
+            </div>
+          </div>
+          <code-example>
+&lt;!-- Embed a map or external page --&gt;
+&lt;iframe src="https://maps.google.com" 
+        width="600" height="450" 
+        title="Location Map"&gt;
+&lt;/iframe&gt;
+
+&lt;!-- Embed a PDF --&gt;
+&lt;embed src="document.pdf" 
+       type="application/pdf"&gt;
+
+&lt;!-- Object element --&gt;
+&lt;object data="movie.swf" 
+        type="application/x-shockwave-flash"&gt;
+&lt;/object&gt;
+          </code-example>
+        </div>
+      </div>
+    </section>
+
+    <!-- Forms -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>Forms &amp; Input Elements</h2>
+        <p>Comprehensive form demonstrations with all major input types.</p>
+      </div>
+      <div class="max-width">
+        <div class="html-demo-card reveal">
+          <h4>
+            <span>Complete Form with All Input Types</span>
+            <span class="demo-badge badge-html">Forms</span>
+          </h4>
+          <div class="preview-area form-demo">
+            <form id="demoForm" onsubmit="event.preventDefault(); alert('Form submitted! (Demo only)');">
+              <fieldset style="border: 1px solid var(--border-color); border-radius: 12px; padding: 20px;">
+                <legend style="font-size: 14px; font-weight: 500; padding: 0 8px; float: none; width: auto;">Personal Information</legend>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="demoText" class="form-label">Text Input</label>
+                    <input type="text" class="form-control" id="demoText" placeholder="Enter text" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="demoEmail" class="form-label">Email Input</label>
+                    <input type="email" class="form-control" id="demoEmail" placeholder="name@example.com" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="demoPassword" class="form-label">Password Input</label>
+                    <input type="password" class="form-control" id="demoPassword" placeholder="Enter password" minlength="8">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="demoTel" class="form-label">Telephone Input</label>
+                    <input type="tel" class="form-control" id="demoTel" placeholder="+44 7700 900123" pattern="[0-9+\s-]{10,}">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="demoNumber" class="form-label">Number Input</label>
+                    <input type="number" class="form-control" id="demoNumber" placeholder="0" min="0" max="100" step="1">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="demoDate" class="form-label">Date Input</label>
+                    <input type="date" class="form-control" id="demoDate">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="demoUrl" class="form-label">URL Input</label>
+                    <input type="url" class="form-control" id="demoUrl" placeholder="https://example.com">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="demoFile" class="form-label">File Input</label>
+                    <input type="file" class="form-control" id="demoFile" accept=".jpg,.png,.pdf">
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label d-block">Radio Buttons (Gender)</label>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="gender" id="genderM" value="male">
+                      <label class="form-check-label" for="genderM">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="gender" id="genderF" value="female">
+                      <label class="form-check-label" for="genderF">Female</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="gender" id="genderO" value="other">
+                      <label class="form-check-label" for="genderO">Other</label>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label d-block">Checkboxes (Interests)</label>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="intHTML" value="html">
+                      <label class="form-check-label" for="intHTML">HTML</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="intCSS" value="css">
+                      <label class="form-check-label" for="intCSS">CSS</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="intJS" value="js">
+                      <label class="form-check-label" for="intJS">JavaScript</label>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label for="demoSelect" class="form-label">Select Dropdown</label>
+                    <select class="form-select" id="demoSelect">
+                      <option value="" selected disabled>Choose a framework...</option>
+                      <option value="react">React</option>
+                      <option value="vue">Vue.js</option>
+                      <option value="angular">Angular</option>
+                      <option value="svelte">Svelte</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label for="demoTextarea" class="form-label">Textarea</label>
+                    <textarea class="form-control" id="demoTextarea" rows="3" placeholder="Enter your message..."></textarea>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <button type="reset" class="btn btn-outline">Reset</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Elements -->
+    <section class="section">
+      <div class="section-header reveal">
+        <h2>Interactive Elements</h2>
+        <p>Native HTML elements for creating interactive user experiences without JavaScript.</p>
+      </div>
+      <div class="element-grid">
+        <div class="html-demo-card reveal">
+          <h4>
+            <span>Details &amp; Summary</span>
+            <span class="demo-badge badge-html">Interactive</span>
+          </h4>
+          <div class="preview-area details-demo">
+            <details>
+              <summary>What is HTML5?</summary>
+              <p style="margin-top: 12px; color: var(--text-secondary);">HTML5 is the latest version of HyperText Markup Language, the standard code used to structure web pages. It introduces semantic elements, multimedia support, and APIs for building rich web applications.</p>
+            </details>
+            <details>
+              <summary>Why use semantic elements?</summary>
+              <p style="margin-top: 12px; color: var(--text-secondary);">Semantic elements like &lt;article&gt;, &lt;section&gt;, and &lt;nav&gt; give meaning to your content. They improve accessibility for screen readers, enhance SEO, and make your code more readable and maintainable.</p>
+            </details>
+            <details>
+              <summary>What are data attributes?</summary>
+              <p style="margin-top: 12px; color: var(--text-secondary);">Data attributes (data-*) allow you to store custom data on HTML elements. They can be accessed via JavaScript using the dataset property, making them perfect for storing state or configuration without extra classes.</p>
+            </details>
+          </div>
+          <code-example>
+&lt;details&gt;
+  &lt;summary&gt;Click to expand&lt;/summary&gt;
+  &lt;p&gt;Hidden content revealed&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;!-- Open by default --&gt;
+&lt;details open&gt;
+  &lt;summary&gt;Already open&lt;/summary&gt;
+  &lt;p&gt;This content is visible&lt;/p&gt;
+&lt;/details&gt;
+          </code-example>
+        </div>
+
+        <div class="html-demo-card reveal reveal-delay-1">
+          <h4>
+            <span>Dialog Element</span>
+            <span class="demo-badge badge-html">Modal</span>
+          </h4>
+          <div class="preview-area dialog-demo">
+            <button class="btn btn-primary" onclick="document.getElementById('demoDialog').showModal()">Open Dialog</button>
+            <dialog id="demoDialog">
+              <h4 style="margin-bottom: 12px;">HTML Dialog</h4>
+              <p style="color: var(--text-secondary); margin-bottom: 20px;">This is a native HTML &lt;dialog&gt; element. It includes built-in focus management, backdrop styling, and accessibility features. Click outside or press Escape to close.</p>
+              <button class="btn btn-primary" onclick="document.getElementById('demoDialog').close()">Close</button>
+            </dialog>
+          </div>
+          <code-example>
+&lt;dialog id="myDialog"&gt;
+  &lt;h2&gt;Dialog Title&lt;/h2&gt;
+  &lt;p&gt;Dialog content here...&lt;/p&gt;
+  &lt;button onclick="dialog.close()"&gt;
+    Close
+  &lt;/button&gt;
+&lt;/dialog&gt;
+
+&lt;script&gt;
+  // Open modal
+  dialog.showModal();
+  // Open non-modal
+  dialog.show();
+  // Close
+  dialog.close();
+&lt;/script&gt;
+          </code-example>
+        </div>
+
+        <div class="html-demo-card reveal reveal-delay-2">
+          <h4>
+            <span>Global Attributes</span>
+            <span class="demo-badge badge-html">Attributes</span>
+          </h4>
+          <div class="preview-area">
+            <p style="font-size: 14px; margin-bottom: 10px;"><code>id</code> - Unique identifier: <span id="example">#example</span></p>
+            <p style="font-size: 14px; margin-bottom: 10px;"><code>class</code> - CSS class selector: <span class="demo-highlight">.highlight</span></p>
+            <p style="font-size: 14px; margin-bottom: 10px;"><code>style</code> - Inline styles: <span style="color: var(--forest-green); font-weight: 600;">Green bold text</span></p>
+            <p style="font-size: 14px; margin-bottom: 10px;"><code>title</code> - Tooltip: <abbr title="HyperText Markup Language">HTML</abbr></p>
+            <p style="font-size: 14px; margin-bottom: 10px;"><code>hidden</code> - Hidden element: <span hidden>This is hidden</span> (invisible)</p>
+            <p style="font-size: 14px; margin-bottom: 10px;"><code>tabindex</code> - Tab order: <a href="#" tabindex="0">Focusable link</a></p>
+            <p style="font-size: 14px; margin-bottom: 10px;"><code>lang</code> - Language: <span lang="fr">Bonjour</span></p>
+            <p style="font-size: 14px; margin: 0;"><code>data-*</code> - Custom data: <span data-tech="html" data-level="advanced" onclick="alert('Tech: ' + this.dataset.tech + ', Level: ' + this.dataset.level)" style="cursor: pointer; color: var(--forest-green); text-decoration: underline;">Click to see data attributes</span></p>
+          </div>
+          <code-example>
+&lt;div id="unique" class="highlight" 
+     style="color: red;"
+     title="Tooltip text"
+     hidden
+     tabindex="0"
+     lang="en"
+     data-user="123"
+     data-role="admin"&gt;
+  Content
+&lt;/div&gt;
+
+&lt;!-- Access in JS --&gt;
+element.dataset.user // "123"
+element.dataset.role // "admin"
+          </code-example>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>My ePortfolio</h3>
+        <p>A comprehensive demonstration of Full Stack Web Development skills, built as a learning portfolio to showcase HTML, CSS, Bootstrap, and JavaScript proficiency.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="fullstack.html">What is Full Stack</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Technologies</h4>
+        <ul class="footer-links">
+          <li><a href="html-demo.html">HTML5</a></li>
+          <li><a href="css-demo.html">CSS3</a></li>
+          <li><a href="bootstrap-demo.html">Bootstrap 5</a></li>
+          <li><a href="js-demo.html">JavaScript</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Thank You</h4>
+        <p style="color: rgba(244,244,244,0.7); font-size: 14px;">Thank you for visiting my ePortfolio. This website was built entirely with HTML5, CSS3, Bootstrap 5, and vanilla JavaScript to demonstrate my understanding of core web technologies.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p> 2024 My ePortfolio. Built with passion for web development education.</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+</body>
+</html>

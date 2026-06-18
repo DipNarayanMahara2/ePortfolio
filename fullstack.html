@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about Full Stack Development - front-end, back-end, databases, version control, and deployment explained with diagrams and examples.">
+  <title>What is Full Stack Development? | My ePortfolio</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    /* Full Stack page specific styles */
+    .concept-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .concept-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 40px;
+      padding: 60px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    
+    .concept-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-color);
+    }
+    
+    .concept-card:nth-child(even) .concept-text {
+      order: 2;
+    }
+    
+    .concept-card:nth-child(even) .concept-diagram {
+      order: 1;
+    }
+    
+    .concept-text h3 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    
+    .concept-text p {
+      color: var(--text-secondary);
+      font-size: 18px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    
+    .concept-text ul {
+      color: var(--text-secondary);
+      font-size: 16px;
+      padding-left: 20px;
+      line-height: 1.8;
+    }
+    
+    .concept-text ul li {
+      margin-bottom: 12px;
+    }
+    
+    .concept-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .diagram-box {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 1/1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(133, 153, 174, 0.15);
+      border: 2px solid var(--soft-blue);
+      border-radius: 50%;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+      transition: all 0.4s ease;
+    }
+    
+    .concept-card:hover .diagram-box {
+      transform: scale(1.05) translateY(-10px);
+    }
+    
+    .diagram-box i {
+      font-size: 64px;
+      color: var(--soft-blue);
+      margin-bottom: 16px;
+    }
+    
+    .diagram-box h4 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    
+    .diagram-box p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    
+    /* Architecture Diagram */
+    .architecture-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .arch-diagram {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    
+    .arch-layer {
+      width: 100%;
+      max-width: 600px;
+      padding: 24px;
+      border-radius: 16px;
+      text-align: center;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    
+    .arch-layer::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 16px;
+      background-color: var(--warm-sand);
+    }
+    
+    .arch-layer:last-child::after {
+      display: none;
+    }
+    
+    .arch-client {
+      background-color: rgba(133, 153, 174, 0.2);
+      border: 2px solid var(--soft-blue);
+    }
+    
+    .arch-server {
+      background-color: rgba(44, 80, 65, 0.15);
+      border: 2px solid var(--forest-green);
+    }
+    
+    .arch-database {
+      background-color: rgba(184, 157, 164, 0.2);
+      border: 2px solid var(--dusty-pink);
+    }
+    
+    .arch-layer h4 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    
+    .arch-layer p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    
+    .arch-tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 12px;
+    }
+    
+    .arch-tech-tag {
+      padding: 4px 12px;
+      background-color: rgba(255,255,255,0.6);
+      border-radius: var(--border-radius-pill);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    .dark-mode .arch-tech-tag {
+      background-color: rgba(255,255,255,0.1);
+    }
+    
+    /* Timeline for Registration Scenario */
+    .timeline-scenario {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .timeline-step {
+      background-color: var(--bg-secondary);
+      border-radius: var(--border-radius);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--accent-primary);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent-primary);
+    }
+    
+    .timeline-step h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .timeline-step h4 .step-number {
+      width: 36px;
+      height: 36px;
+      background-color: var(--accent-primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    
+    .timeline-step p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin: 0;
+    }
+    
+    .timeline-step code {
+      background-color: var(--primary-accent-light);
+      color: var(--accent-primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    
+    @media (max-width: 991px) {
+      .concept-card {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+        gap: 40px;
+      }
+      
+      .concept-card:nth-child(even) .concept-text,
+      .concept-card:nth-child(even) .concept-diagram {
+        order: unset;
+      }
+      
+      .concept-diagram {
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Page Loader -->
+  <div class="page-loader" role="status" aria-label="Loading page">
+    <div class="loader-shape"></div>
+  </div>
+
+  <!-- Fixed Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="site-logo">My ePortfolio</a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="fullstack.html" class="nav-link active">Full Stack</a>
+        <a href="html-demo.html" class="nav-link">HTML</a>
+        <a href="css-demo.html" class="nav-link">CSS</a>
+        <a href="bootstrap-demo.html" class="nav-link">Bootstrap</a>
+        <a href="js-demo.html" class="nav-link">JavaScript</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="fullstack.html" class="nav-link active">Full Stack</a>
+      <a href="html-demo.html" class="nav-link">HTML</a>
+      <a href="css-demo.html" class="nav-link">CSS</a>
+      <a href="bootstrap-demo.html" class="nav-link">Bootstrap</a>
+      <a href="js-demo.html" class="nav-link">JavaScript</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    
+    <!-- Page Hero -->
+    <section class="hero page-hero">
+      <div class="hero-content reveal">
+        <h1>What is Full Stack Development?</h1>
+        <p>Full Stack Development refers to the complete process of building a web application, encompassing everything the user sees and interacts with, the server logic that processes requests, and the database that stores information.</p>
+      </div>
+    </section>
+
+    <!-- Definition Section -->
+    <section class="section">
+      <div class="container-narrow reveal">
+        <h2 class="text-center mb-4">Understanding the Stack</h2>
+        <p class="text-center" style="color: var(--text-secondary); font-size: 17px; max-width: 700px; margin: 0 auto 40px;">
+          A "stack" refers to the collection of technologies used to build a complete web application. A Full Stack Developer has the skills to work across all layers of this stack, from the visual interface users interact with to the server-side logic and data storage systems that power the application behind the scenes.
+        </p>
+      </div>
+      
+      <div class="concept-grid">
+        <!-- Front-End -->
+        <article class="concept-card reveal">
+          <div class="concept-text">
+            <h3><i class="bi bi-window-desktop" style="color: var(--soft-blue);"></i> Front-End Development</h3>
+            <p>The client-side of an application. Everything the user sees, touches, and interacts with in their browser. Front-end developers focus on creating intuitive, responsive, and visually appealing user interfaces.</p>
+            <ul>
+              <li><strong>HTML</strong> &mdash; Structure and semantic content</li>
+              <li><strong>CSS</strong> &mdash; Styling, layout, and animations</li>
+              <li><strong>JavaScript</strong> &mdash; Interactivity and dynamic behaviour</li>
+              <li><strong>Responsive Design</strong> &mdash; Adapts to all screen sizes</li>
+              <li><strong>Accessibility</strong> &mdash; Usable by everyone</li>
+            </ul>
+          </div>
+          <div class="concept-diagram">
+            <div class="diagram-box">
+              <i class="bi bi-window-desktop"></i>
+              <h4>Client (Browser)</h4>
+              <p>Renders HTML, CSS, and executes JavaScript to display the user interface</p>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Back-End -->
+        <article class="concept-card reveal reveal-delay-1">
+          <div class="concept-text">
+            <h3><i class="bi bi-server" style="color: var(--forest-green);"></i> Back-End Development</h3>
+            <p>The server-side of an application. Handles business logic, authentication, data processing, and communication between the front-end and database. Users never directly interact with the back-end.</p>
+            <ul>
+              <li><strong>Server Languages</strong> &mdash; Node.js, Python, PHP, Java</li>
+              <li><strong>APIs</strong> &mdash; RESTful and GraphQL endpoints</li>
+              <li><strong>Authentication</strong> &mdash; Login, sessions, JWT tokens</li>
+              <li><strong>Business Logic</strong> &mdash; Data validation, processing</li>
+              <li><strong>Security</strong> &mdash; HTTPS, CORS, input sanitisation</li>
+            </ul>
+          </div>
+          <div class="concept-diagram">
+            <div class="diagram-box" style="border-color: var(--forest-green); background-color: rgba(44, 80, 65, 0.1);">
+              <i class="bi bi-server" style="color: var(--forest-green);"></i>
+              <h4>Server</h4>
+              <p>Processes requests, runs application logic, and communicates with the database</p>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Database -->
+        <article class="concept-card reveal reveal-delay-2">
+          <div class="concept-text">
+            <h3><i class="bi bi-database" style="color: var(--dusty-pink);"></i> Database Layer</h3>
+            <p>Persistent storage for application data. Databases organise, store, and retrieve information efficiently. They ensure data integrity and allow complex queries across related datasets.</p>
+            <ul>
+              <li><strong>Relational (SQL)</strong> &mdash; MySQL, PostgreSQL, SQLite</li>
+              <li><strong>NoSQL</strong> &mdash; MongoDB, Redis, Firebase</li>
+              <li><strong>CRUD Operations</strong> &mdash; Create, Read, Update, Delete</li>
+              <li><strong>Relationships</strong> &mdash; One-to-one, one-to-many, many-to-many</li>
+              <li><strong>Indexing</strong> &mdash; Optimised data retrieval</li>
+            </ul>
+          </div>
+          <div class="concept-diagram">
+            <div class="diagram-box" style="border-color: var(--dusty-pink); background-color: rgba(184, 157, 164, 0.1);">
+              <i class="bi bi-database" style="color: var(--dusty-pink);"></i>
+              <h4>Database</h4>
+              <p>Stores and organises all application data with persistent, structured storage</p>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Version Control & Deployment -->
+        <article class="concept-card reveal reveal-delay-3">
+          <div class="concept-text">
+            <h3><i class="bi bi-git" style="color: var(--periwinkle);"></i> Version Control &amp; Deployment</h3>
+            <p>Essential practices for professional development. Version control tracks code changes, enables collaboration, and maintains history. Deployment makes applications available to users on the internet.</p>
+            <ul>
+              <li><strong>Git</strong> &mdash; Distributed version control system</li>
+              <li><strong>GitHub/GitLab</strong> &mdash; Remote repositories, collaboration</li>
+              <li><strong>Branching</strong> &mdash; Feature branches, pull requests</li>
+              <li><strong>Hosting</strong> &mdash; Netlify, Vercel, AWS, Heroku</li>
+              <li><strong>CI/CD</strong> &mdash; Automated testing and deployment</li>
+            </ul>
+          </div>
+          <div class="concept-diagram">
+            <div class="diagram-box" style="border-color: var(--periwinkle); background-color: rgba(139, 133, 168, 0.1);">
+              <i class="bi bi-git" style="color: var(--periwinkle);"></i>
+              <h4>DevOps</h4>
+              <p>Version control, testing, and deployment pipelines for reliable releases</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Architecture Diagram -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>Full Stack Architecture</h2>
+        <p>How the layers connect to form a complete application.</p>
+      </div>
+      <div class="architecture-section reveal reveal-delay-1">
+        <div class="arch-diagram">
+          <div class="arch-layer arch-client">
+            <h4><i class="bi bi-window-desktop"></i> Presentation Layer (Front-End)</h4>
+            <p>HTML, CSS, JavaScript running in the user's browser</p>
+            <div class="arch-tech-tags">
+              <span class="arch-tech-tag">HTML5</span>
+              <span class="arch-tech-tag">CSS3</span>
+              <span class="arch-tech-tag">JavaScript</span>
+              <span class="arch-tech-tag">Bootstrap</span>
+            </div>
+          </div>
+          <div class="arch-layer arch-server">
+            <h4><i class="bi bi-server"></i> Application Layer (Back-End)</h4>
+            <p>Server logic, APIs, authentication, business rules</p>
+            <div class="arch-tech-tags">
+              <span class="arch-tech-tag">Node.js</span>
+              <span class="arch-tech-tag">Express</span>
+              <span class="arch-tech-tag">REST API</span>
+              <span class="arch-tech-tag">Auth</span>
+            </div>
+          </div>
+          <div class="arch-layer arch-database">
+            <h4><i class="bi bi-database"></i> Data Layer (Database)</h4>
+            <p>Persistent storage for users, content, and application data</p>
+            <div class="arch-tech-tags">
+              <span class="arch-tech-tag">MySQL</span>
+              <span class="arch-tech-tag">MongoDB</span>
+              <span class="arch-tech-tag">PostgreSQL</span>
+              <span class="arch-tech-tag">Redis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Responsibilities -->
+    <section class="section">
+      <div class="max-width reveal">
+        <h2 class="text-center mb-5">Responsibilities of a Full Stack Developer</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-icon"><i class="bi bi-palette"></i></div>
+              <h4>UI/UX Implementation</h4>
+              <p style="color: var(--text-secondary); font-size: 15px;">Translate design mockups into pixel-perfect, responsive interfaces that work across all devices and browsers.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-icon"><i class="bi bi-shield-check"></i></div>
+              <h4>API Development</h4>
+              <p style="color: var(--text-secondary); font-size: 15px;">Design and build secure RESTful APIs that handle data exchange between client and server efficiently.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-icon"><i class="bi bi-database-gear"></i></div>
+              <h4>Database Design</h4>
+              <p style="color: var(--text-secondary); font-size: 15px;">Create efficient database schemas, write optimised queries, and ensure data integrity and security.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-icon"><i class="bi bi-bug"></i></div>
+              <h4>Testing &amp; Debugging</h4>
+              <p style="color: var(--text-secondary); font-size: 15px;">Write unit and integration tests, debug issues across the entire stack, and ensure code quality.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-icon"><i class="bi bi-rocket-takeoff"></i></div>
+              <h4>Deployment</h4>
+              <p style="color: var(--text-secondary); font-size: 15px;">Configure servers, manage domains and SSL certificates, and set up CI/CD pipelines for automated deployment.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-icon"><i class="bi bi-people"></i></div>
+              <h4>Collaboration</h4>
+              <p style="color: var(--text-secondary); font-size: 15px;">Work with designers, product managers, and other developers using Git, Agile methodologies, and clear communication.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- User Registration Scenario -->
+    <section class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>User Registration System Scenario</h2>
+        <p>A practical example of how all layers work together in a common web application feature.</p>
+      </div>
+      <div class="timeline-scenario">
+        <div class="timeline-step reveal">
+          <h4><span class="step-number">1</span> User Fills the Registration Form</h4>
+          <p>The user enters their name, email, and password into an HTML form on the front-end. JavaScript performs client-side validation to check that the email format is valid and the password meets minimum requirements before submission.</p>
+        </div>
+        <div class="timeline-step reveal reveal-delay-1">
+          <h4><span class="step-number">2</span> Front-End Sends Data to Server</h4>
+          <p>JavaScript captures the form data and sends it as a <code>POST</code> request (typically as JSON) to the back-end API endpoint, such as <code>/api/auth/register</code>. The Fetch API or XMLHttpRequest handles this communication.</p>
+        </div>
+        <div class="timeline-step reveal reveal-delay-2">
+          <h4><span class="step-number">3</span> Server Receives and Validates</h4>
+          <p>The back-end server receives the request, parses the JSON body, and performs server-side validation. This includes checking if the email already exists in the database, sanitising inputs to prevent injection attacks, and verifying password strength.</p>
+        </div>
+        <div class="timeline-step reveal reveal-delay-3">
+          <h4><span class="step-number">4</span> Database Stores User Data</h4>
+          <p>After validation, the server hashes the password using a secure algorithm (like bcrypt), then inserts the new user record into the database via a SQL <code>INSERT</code> statement or NoSQL equivalent. The database returns a confirmation with the new user's unique ID.</p>
+        </div>
+        <div class="timeline-step reveal reveal-delay-4">
+          <h4><span class="step-number">5</span> Server Responds to Client</h4>
+          <p>The server sends a JSON response back to the browser. On success, it typically includes a JWT token for authentication and a success message. On failure, it returns appropriate error codes and messages (e.g., 409 Conflict for duplicate email).</p>
+        </div>
+        <div class="timeline-step reveal reveal-delay-5">
+          <h4><span class="step-number">6</span> Front-End Handles Response</h4>
+          <p>JavaScript receives the response, updates the UI accordingly (redirecting to a dashboard on success, or displaying error messages), and stores the authentication token in <code>localStorage</code> or a cookie for future authenticated requests.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>My ePortfolio</h3>
+        <p>A comprehensive demonstration of Full Stack Web Development skills, built as a learning portfolio to showcase HTML, CSS, Bootstrap, and JavaScript proficiency.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="fullstack.html">What is Full Stack</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Technologies</h4>
+        <ul class="footer-links">
+          <li><a href="html-demo.html">HTML5</a></li>
+          <li><a href="css-demo.html">CSS3</a></li>
+          <li><a href="bootstrap-demo.html">Bootstrap 5</a></li>
+          <li><a href="js-demo.html">JavaScript</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Thank You</h4>
+        <p style="color: rgba(244,244,244,0.7); font-size: 14px;">Thank you for visiting my ePortfolio. This website was built entirely with HTML5, CSS3, Bootstrap 5, and vanilla JavaScript to demonstrate my understanding of core web technologies.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 My ePortfolio. Built with passion for web development education.</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+</body>
+</html>

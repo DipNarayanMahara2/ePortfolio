@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="My ePortfolio - A comprehensive showcase of Full Stack Web Development skills including HTML, CSS, Bootstrap, and JavaScript demonstrations.">
+  <meta name="keywords" content="Full Stack Development, Web Development, HTML, CSS, Bootstrap, JavaScript, Portfolio">
+  <meta name="author" content="Junior Developer">
+  <title>My ePortfolio | Full Stack Web Development</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    /* Full Screen Hero Redesign */
+    .hero-immersive {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 0 24px;
+    }
+
+    .hero-immersive::before {
+      content: 'DEVELOPER';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20vw;
+      font-weight: 900;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--border-color);
+      z-index: -1;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .hero-glow-mesh {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80vw;
+      height: 80vw;
+      background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, rgba(0, 0, 0, 0) 60%);
+      border-radius: 50%;
+      z-index: -1;
+      animation: pulse-glow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse-glow {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    .hero-immersive h1 {
+      font-size: clamp(40px, 8vw, 100px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      line-height: 1;
+      background: linear-gradient(180deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-immersive p {
+      font-size: clamp(18px, 2vw, 24px);
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 48px;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      opacity: 0.6;
+      animation: bounce 2s infinite;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .scroll-indicator:hover {
+      color: var(--primary-color);
+      opacity: 1;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(0) translateX(-50%);
+      }
+
+      40% {
+        transform: translateY(-10px) translateX(-50%);
+      }
+
+      60% {
+        transform: translateY(-5px) translateX(-50%);
+      }
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .bento-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+      text-decoration: none;
+      color: inherit;
+      min-height: 250px;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-color);
+      color: inherit;
+    }
+
+    .bento-card h3 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .bento-card p {
+      color: var(--text-secondary);
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .bento-icon {
+      font-size: 48px;
+      color: var(--primary-color);
+      margin-bottom: auto;
+    }
+
+    .project-cinematic {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
+    }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .project-row.reversed .project-visual {
+      order: 2;
+    }
+
+    .project-row.reversed .project-info {
+      order: 1;
+    }
+
+    .project-visual img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.5s ease;
+    }
+
+    .project-row:hover .project-visual img {
+      transform: scale(1.02);
+    }
+
+    .project-info h3 {
+      font-size: 40px;
+      margin-bottom: 24px;
+    }
+
+    .project-info p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      line-height: 1.8;
+    }
+
+    .masonry-testimonials {
+      columns: 3 300px;
+      column-gap: 24px;
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 24px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .masonry-item p {
+      font-size: 16px;
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+
+    .masonry-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .masonry-author img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .masonry-author h5 {
+      margin: 0 0 4px 0;
+      font-size: 16px;
+    }
+
+    .masonry-author span {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .contact-pop {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 40px;
+      margin: 0 24px;
+      padding: 80px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-pop::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(79, 70, 229, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .contact-pop .form-control {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .contact-pop .form-control:focus {
+      background: var(--bg-hover);
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);
+    }
+
+    .contact-pop .form-label {
+      color: var(--text-primary);
+    }
+
+    .contact-pop h2 {
+      color: var(--text-primary);
+      font-size: 48px;
+    }
+
+    .contact-pop p {
+      color: var(--text-secondary);
+      font-size: 18px;
+    }
+
+    .social-links-modern {
+      display: flex;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .social-links-modern a {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      font-size: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .social-links-modern a:hover {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 991px) {
+
+      .project-row,
+      .contact-pop {
+        grid-template-columns: 1fr;
+      }
+
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-row.reversed .project-visual {
+        order: 1;
+      }
+
+      .project-row.reversed .project-info {
+        order: 2;
+      }
+
+      .masonry-testimonials {
+        columns: 1;
+      }
+
+      .contact-pop {
+        padding: 40px 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Skip Link for Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Page Loader -->
+  <div class="page-loader" role="status" aria-label="Loading page">
+    <div class="loader-shape"></div>
+  </div>
+
+  <!-- Fixed Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="site-logo">My ePortfolio</a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="fullstack.html" class="nav-link">Full Stack</a>
+        <a href="html-demo.html" class="nav-link">HTML</a>
+        <a href="css-demo.html" class="nav-link">CSS</a>
+        <a href="bootstrap-demo.html" class="nav-link">Bootstrap</a>
+        <a href="js-demo.html" class="nav-link">JavaScript</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode"></button>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="fullstack.html" class="nav-link">Full Stack</a>
+      <a href="html-demo.html" class="nav-link">HTML</a>
+      <a href="css-demo.html" class="nav-link">CSS</a>
+      <a href="bootstrap-demo.html" class="nav-link">Bootstrap</a>
+      <a href="js-demo.html" class="nav-link">JavaScript</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+
+    <!-- Full-Screen Immersive Hero Section -->
+    <section class="hero-immersive">
+      <div class="hero-glow-mesh"></div>
+
+      <div class="reveal" style="z-index: 1;">
+        <h1>Full Stack Web<br>Developer.</h1>
+        <p class="mx-auto">I build beautiful, responsive, and highly functional digital experiences from the ground up.
+        </p>
+
+        <div class="d-flex justify-content-center gap-3">
+          <a href="projects.html" class="btn btn-primary btn-lg px-5 py-3 rounded-pill fw-bold">View My Work</a>
+          <a href="contact.html" class="btn btn-outline btn-lg px-5 py-3 rounded-pill fw-bold">Get In Touch</a>
+        </div>
+      </div>
+
+      <a href="#skills" class="scroll-indicator" aria-label="Scroll down">
+        <span class="small text-uppercase tracking-wider" style="letter-spacing: 2px; font-size: 12px;">Scroll</span>
+        <i class="bi bi-arrow-down"></i>
+      </a>
+    </section>
+
+    <!-- Bento Box Skills Overview -->
+    <section id="skills" class="section bg-white-section">
+      <div class="section-header reveal">
+        <h2>My Skillset</h2>
+        <p>A curated showcase of my foundational capabilities.</p>
+      </div>
+      <div class="bento-grid">
+        <a href="js-demo.html" class="bento-card reveal">
+          <i class="bi bi-filetype-js bento-icon"></i>
+          <div>
+            <h3>JavaScript</h3>
+            <p>From DOM manipulation and event delegation to asynchronous API fetches, Promises, and object-oriented
+              programming patterns.</p>
+          </div>
+        </a>
+
+        <a href="bootstrap-demo.html" class="bento-card reveal reveal-delay-1">
+          <i class="bi bi-bootstrap bento-icon"></i>
+          <div>
+            <h3>Bootstrap 5</h3>
+            <p>Rapid UI development with advanced grids, robust utility classes, and highly responsive pre-built
+              interactive components.</p>
+          </div>
+        </a>
+
+        <a href="html-demo.html" class="bento-card reveal reveal-delay-2">
+          <i class="bi bi-filetype-html bento-icon"></i>
+          <div>
+            <h3>HTML5</h3>
+            <p>Semantic structuring, multimedia elements, and flawless accessibility.</p>
+          </div>
+        </a>
+
+        <a href="css-demo.html" class="bento-card reveal reveal-delay-3">
+          <i class="bi bi-filetype-css bento-icon"></i>
+          <div>
+            <h3>CSS3</h3>
+            <p>Advanced Flexbox, CSS Grid, custom animations, and responsive cascading.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Cinematic Projects Section -->
+    <section class="section" style="padding: 120px 0;">
+      <div class="section-header reveal mb-5">
+        <h2>Featured Work</h2>
+        <p>Deep dives into comprehensive applications I've built.</p>
+      </div>
+      <div class="project-cinematic">
+
+        <div class="project-row reveal">
+          <div class="project-visual">
+            <img src="images/project1.jpg" alt="E-Commerce Dashboard">
+          </div>
+          <div class="project-info">
+            <span class="text-primary fw-bold mb-2 d-block">Admin Interface</span>
+            <h3>E-Commerce Dashboard</h3>
+            <p>A fully responsive admin dashboard tailored for managing products, monitoring orders, and analyzing data
+              metrics. Built with semantic HTML, fluid CSS Grid layouts, and robust JavaScript charting capabilities.
+            </p>
+            <a href="projects.html#project1" class="btn btn-outline rounded-pill px-4">View Case Study &rarr;</a>
+          </div>
+        </div>
+
+        <div class="project-row reversed reveal">
+          <div class="project-visual">
+            <img src="images/project2.jpg" alt="Task Manager">
+          </div>
+          <div class="project-info">
+            <span class="text-primary fw-bold mb-2 d-block">Productivity App</span>
+            <h3>Task Manager App</h3>
+            <p>A sophisticated drag-and-drop task management tool utilizing localStorage for seamless data persistence.
+              Implements complex CRUD operations, dynamic filtering mechanisms, and a flawless Bootstrap interface.</p>
+            <a href="projects.html#project2" class="btn btn-outline rounded-pill px-4">View Case Study &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+      <div class="text-center mt-5 pt-5 reveal">
+        <a href="projects.html" class="btn btn-primary btn-lg rounded-pill px-5">View Complete Portfolio</a>
+      </div>
+    </section>
+
+    <!-- Masonry Testimonials -->
+    <section class="section bg-white-section" style="padding-bottom: 120px;">
+      <div class="section-header reveal">
+        <h2>Endorsements</h2>
+        <p>Kind words from mentors and collaborators.</p>
+      </div>
+      <div class="masonry-testimonials">
+        <div class="masonry-item reveal">
+          <p>"An exceptional understanding of web fundamentals. The attention to semantic structure and accessibility
+            standards really sets this work apart. A promising developer with a bright future."</p>
+          <div class="masonry-author">
+            <img src="images/testimonial1.jpg" alt="Sarah Mitchell">
+            <div>
+              <h5>Sarah Mitchell</h5>
+              <span>Senior Tech Lead, InnovateTech</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item reveal reveal-delay-1">
+          <p>"The JavaScript demonstrations show real depth of understanding. From DOM manipulation to async
+            programming, every concept is implemented with clean, well-commented code."</p>
+          <div class="masonry-author">
+            <img src="images/testimonial2.jpg" alt="James Cooper">
+            <div>
+              <h5>James Cooper</h5>
+              <span>Full Stack Developer, CodeCraft</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item reveal reveal-delay-2">
+          <p>"The Bootstrap component showcase is comprehensive and practical. Shows not just knowledge of the
+            framework, but the ability to customize and extend it effectively."</p>
+          <div class="masonry-author">
+            <img src="images/testimonial3.jpg" alt="Emily Rodriguez">
+            <div>
+              <h5>Emily Rodriguez</h5>
+              <span>UX Designer, DigitalFirst</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Elevated Contact Section -->
+    <section class="section" style="padding-top: 0;">
+      <div class="contact-pop reveal">
+        <div class="contact-pop-text">
+          <h2>Let's build something great.</h2>
+          <p class="mb-4">I'm currently seeking Junior Full Stack Developer opportunities. Whether you have a role in
+            mind or just want to collaborate, I'd love to hear from you.</p>
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <i class="bi bi-envelope-fill fs-4 text-primary"></i>
+            <span>developer@myeportfolio.com</span>
+          </div>
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <i class="bi bi-telephone-fill fs-4 text-primary"></i>
+            <span>+44 (0) 7700 900123</span>
+          </div>
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <i class="bi bi-geo-alt-fill fs-4 text-primary"></i>
+            <span>London, United Kingdom</span>
+          </div>
+
+          <div class="social-links-modern">
+            <a href="https://github.com"><i class="bi bi-github"></i></a>
+            <a href="https://linkedin.com"><i class="bi bi-linkedin"></i></a>
+            <a href="https://twitter.com"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+
+        <div class="contact-pop-form">
+          <form id="homeContactForm" novalidate>
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" id="contactName" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" id="contactEmail" required>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" id="contactMessage" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>My ePortfolio</h3>
+        <p>A comprehensive demonstration of Full Stack Web Development skills, built as a learning portfolio to showcase
+          HTML, CSS, Bootstrap, and JavaScript proficiency.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="fullstack.html">What is Full Stack</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Technologies</h4>
+        <ul class="footer-links">
+          <li><a href="html-demo.html">HTML5</a></li>
+          <li><a href="css-demo.html">CSS3</a></li>
+          <li><a href="bootstrap-demo.html">Bootstrap 5</a></li>
+          <li><a href="js-demo.html">JavaScript</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Thank You</h4>
+        <p style="color: rgba(244,244,244,0.7); font-size: 14px;">Thank you for visiting my ePortfolio. This website was
+          built entirely with HTML5, CSS3, Bootstrap 5, and vanilla JavaScript to demonstrate my understanding of core
+          web technologies.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p> 2024 My ePortfolio. Built with passion for web development education.</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="js/main.js"></script>
+
+  <script>
+    // Home page specific JavaScript
+    document.addEventListener('DOMContentLoaded', function () {
+      // Contact form validation
+      const contactForm = document.getElementById('homeContactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          let isValid = true;
+          const name = document.getElementById('contactName');
+          const email = document.getElementById('contactEmail');
+          const message = document.getElementById('contactMessage');
+
+          // Reset validation
+          [name, email, message].forEach(field => field.classList.remove('is-invalid'));
+
+          // Validate name
+          if (!name.value.trim()) {
+            name.classList.add('is-invalid');
+            isValid = false;
+          }
+
+          // Validate email
+          if (!email.value.trim() || !validateEmail(email.value)) {
+            email.classList.add('is-invalid');
+            isValid = false;
+          }
+
+          // Validate message
+          if (!message.value.trim()) {
+            message.classList.add('is-invalid');
+            isValid = false;
+          }
+
+          if (isValid) {
+            showToast('Thank you! Your message has been sent successfully.');
+            contactForm.reset();
+          }
+        });
+      }
+    });
+
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+  </script>
+</body>
+
+</html>
